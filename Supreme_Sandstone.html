@@ -41,7 +41,7 @@
       <input type="range" class="range-input" id="scope-slider" min="30" max="150" value="60" oninput="updatePricing()">
       <div class="price-display">
         <div style="font-size: 11px; text-transform: uppercase; color: #8b9bb4; letter-spacing: 0.8px; margin-bottom: 4px;">Dynamic Scope Estimate</div>
-        <div class="price-val" id="price-target">$0</div>
+        <div class="price-val" id="price-target">£0</div>
       </div>
     </div>
 
@@ -72,7 +72,7 @@
       document.getElementById('unit-val').innerText = val + ' ' + unit;
       const low = Math.round(val * rate * 0.9);
       const high = Math.round(val * rate * 1.15);
-      const priceStr = curr + low.toLocaleString() + ' – ' + curr + high.toLocaleString();
+      const priceStr = curr + low.toLocaleString() + ' - ' + curr + high.toLocaleString();
       document.getElementById('price-target').innerText = priceStr;
       document.getElementById('form-scope-value').value = val + ' ' + unit;
       document.getElementById('form-estimate-value').value = priceStr;
