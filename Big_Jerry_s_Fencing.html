@@ -1,725 +1,481 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tier-1 Australian Trade Showroom</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #f59e0b;
-      --accent-glow: rgba(245, 158, 11, 0.25);
-      --bg-base: #06090e;
-      --surface-1: #0e1420;
-      --surface-2: #141c2c;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(255, 255, 255, 0.18);
-      --text: #f8fafc;
-      --muted: #8b9bb4;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fencing | Verified Trade Showroom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-glow: rgba(245, 158, 11, 0.25);
+            --bg-base: #090d16;
+            --surface-1: #0f172a;
+            --surface-2: #1e293b;
+            --surface-glass: rgba(15, 23, 42, 0.85);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(245, 158, 11, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body {
-      background: var(--bg-base);
-      color: var(--text);
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-main); }
+        body { background: var(--bg-base); color: var(--text-main); line-height: 1.5; overflow-x: hidden; }
 
-    /* Background architectural grid */
-    .grid-backdrop {
-      position: fixed;
-      inset: 0;
-      background-image: 
-        radial-gradient(circle at 50% 0%, var(--accent-glow) 0%, transparent 45%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 48px 48px, 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-    }
+        /* Top Trust Strip */
+        .trust-strip {
+            background: #020617;
+            border-bottom: 1px solid var(--border);
+            padding: 8px 24px;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+        .trust-badges { display: flex; gap: 16px; align-items: center; }
+        .trust-badge-active { color: #10b981; display: flex; align-items: center; gap: 6px; }
+        .trust-badge-active::before { content: ""; width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
 
-    /* Interactive Switcher Top Bar */
-    .top-controls {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: rgba(6, 9, 14, 0.9);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .controls-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .switcher-pills {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .pill-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .pill-btn:hover, .pill-btn.active {
-      background: #ffffff;
-      color: #000000;
-      border-color: #ffffff;
-      transform: translateY(-1px);
-    }
+        /* Header Navigation */
+        header {
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface-glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .brand { display: flex; align-items: center; gap: 14px; }
+        .avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), #d97706);
+            color: #000;
+            font-weight: 800;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+        .brand-meta h1 { font-size: 1.15rem; font-weight: 700; color: #fff; }
+        .brand-meta p { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 700; letter-spacing: 0.08em; }
 
-    /* License and Trust Strip */
-    .trust-strip {
-      position: relative;
-      z-index: 10;
-      background: rgba(14, 20, 32, 0.6);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 48px;
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .trust-items { display: flex; gap: 24px; align-items: center; }
-    .trust-item { display: inline-flex; align-items: center; gap: 7px; }
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 10px #10b981;
-    }
+        .header-actions { display: flex; gap: 14px; align-items: center; }
+        .btn-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #d97706);
+            color: #000;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 14px var(--primary-glow);
+            transition: all 0.2s;
+        }
 
-    /* Main Navigation Header */
-    header {
-      position: relative;
-      z-index: 10;
-      padding: 18px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .brand-identity { display: flex; align-items: center; gap: 14px; }
-    .brand-avatar {
-      width: 44px;
-      height: 44px;
-      background: var(--accent);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      color: #000000;
-      transition: background 0.3s ease;
-    }
-    .brand-name { font-size: 20px; font-weight: 800; letter-spacing: -0.4px; }
-    .brand-meta { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+        /* Container */
+        .container { max-width: 1240px; margin: 0 auto; padding: 48px 24px; }
 
-    .header-actions { display: flex; align-items: center; gap: 24px; }
-    .direct-call {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: 0.2px;
-    }
-    .btn-scope {
-      background: var(--accent);
-      color: #000000;
-      font-weight: 800;
-      font-size: 13px;
-      padding: 12px 22px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: transform 0.2s, filter 0.2s;
-    }
-    .btn-scope:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
-    }
+        /* Hero Split */
+        .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; margin-bottom: 72px; }
+        .trade-pill {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--primary);
+            border: 1px solid var(--primary-glow);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .hero h2 {
+            font-family: var(--font-display);
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
+        }
+        .hero p.lead { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
+        .hero-stats { display: flex; gap: 28px; padding-top: 18px; border-top: 1px solid var(--border); }
+        .stat-item h3 { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .stat-item span { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
 
-    /* Layout Wrapper */
-    .content-shell {
-      position: relative;
-      z-index: 10;
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 56px 48px 80px;
-    }
+        /* Calculator Panel */
+        .calc-box {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .calc-header { margin-bottom: 22px; }
+        .calc-header h3 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .calc-header p { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* Hero Section */
-    .hero-split {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 56px;
-      align-items: start;
-      margin-bottom: 72px;
-    }
-    .eyebrow-tag {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: var(--accent);
-      background: rgba(255, 255, 255, 0.04);
-      padding: 6px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      margin-bottom: 20px;
-    }
-    .headline-display {
-      font-size: 46px;
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: -1.2px;
-      margin-bottom: 20px;
-    }
-    .lead-paragraph {
-      font-size: 17px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 36px;
-    }
+        .calc-group { margin-bottom: 18px; }
+        .calc-group label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px; }
+        .pill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .pill-option {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 10px 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pill-option.active { background: var(--primary-glow); border-color: var(--primary); color: #fff; }
 
-    .standards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .standard-item {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #cbd5e1;
-    }
-    .standard-item svg { width: 18px; height: 18px; color: #10b981; flex-shrink: 0; }
+        .estimate-banner {
+            background: #020617;
+            border: 1px dashed var(--border-highlight);
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .estimate-banner span { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+        .estimate-banner strong { font-size: 1.2rem; font-family: var(--font-display); color: var(--primary); }
 
-    /* Interactive Scope Calculator */
-    .calculator-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-focus);
-      border-radius: 20px;
-      padding: 36px;
-      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    .card-heading { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-    .card-caption { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+        .calc-form input {
+            width: 100%;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            padding: 12px 14px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        .calc-form input:focus { border-color: var(--primary); }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), #d97706);
+            border: none;
+            color: #000;
+            font-weight: 800;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow: 0 4px 14px var(--primary-glow);
+        }
 
-    .selector-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #cbd5e1;
-      margin-bottom: 8px;
-    }
-    .choice-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    .choice-btn {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 12px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s ease;
-    }
-    .choice-btn.active, .choice-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--accent);
-      color: #ffffff;
-    }
+        /* Section Headlines */
+        .section-title { text-align: center; margin-bottom: 48px; }
+        .section-title h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .section-title p { color: var(--text-muted); font-size: 0.95rem; }
 
-    /* Live Estimation Output Preview */
-    .estimate-range-box {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px dashed var(--border-focus);
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .est-label { font-size: 12px; color: var(--muted); font-weight: 600; }
-    .est-value { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent); }
+        /* Scope Tier Cards */
+        .tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px; }
+        .tier-card {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .tier-card.featured { border-color: var(--primary); box-shadow: 0 0 25px var(--primary-glow); }
+        .tier-card.featured::before {
+            content: "POPULAR SPEC";
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--primary);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.08em;
+        }
+        .tier-card h4 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .tier-price { font-size: 1.6rem; font-weight: 800; color: var(--primary); font-family: var(--font-display); margin-bottom: 16px; }
+        .tier-features { list-style: none; margin-bottom: 24px; }
+        .tier-features li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .tier-features li::before { content: "✓"; color: var(--primary); font-weight: 800; }
 
-    .phone-input {
-      width: 100%;
-      background: #06090e;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      color: #ffffff;
-      font-size: 14px;
-      outline: none;
-      margin-bottom: 16px;
-      transition: border-color 0.2s ease;
-    }
-    .phone-input:focus { border-color: var(--accent); }
+        /* Reviews Matrix */
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px; }
+        .review-card {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .review-stars { color: #f59e0b; margin-bottom: 12px; font-size: 0.9rem; }
+        .review-card p { font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px; }
+        .reviewer-meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
 
-    .btn-submit-scope {
-      width: 100%;
-      background: var(--accent);
-      color: #000000;
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      padding: 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .btn-submit-scope:hover {
-      filter: brightness(1.15);
-      transform: translateY(-1px);
-    }
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            background: #020617;
+            padding: 40px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
 
-    /* Performance Proof Strip */
-    .proof-banner {
-      background: rgba(14, 20, 32, 0.4);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 48px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      text-align: center;
-      margin-bottom: 72px;
-    }
-    .metric-data {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 38px;
-      font-weight: 800;
-      color: #ffffff;
-    }
-    .metric-caption {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 4px;
-    }
-
-    /* Verified Recent Projects Section */
-    .projects-header {
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .section-title { font-size: 24px; font-weight: 800; }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .project-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .proj-type {
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .proj-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-    .proj-detail { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
-    .proj-meta {
-      border-top: 1px solid var(--border);
-      padding-top: 14px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    @media (max-width: 990px) {
-      .hero-split { grid-template-columns: 1fr; gap: 40px; }
-      .proof-banner { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .content-shell { padding: 36px 20px 60px; }
-      header { padding: 16px 20px; }
-      .trust-strip { padding: 10px 20px; }
-      .headline-display { font-size: 34px; }
-    }
-  </style>
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .tiers-grid, .reviews-grid { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="grid-backdrop"></div>
-
-  <!-- Interactive Controls Bar -->
-  <div class="top-controls" style="display:none;">
-    <span class="controls-label">Commercial Trade Showroom</span>
-    <div class="switcher-pills" style="display:none;">
-      <button class="pill-btn active" onclick="setTrade('concreting')">Big Jerry's Fencing</button>
-      <button class="pill-btn" onclick="setTrade('fencing')">Harding Fencing</button>
-      <button class="pill-btn" onclick="setTrade('roofing')">D &amp; B Roofing</button>
-      <button class="pill-btn" onclick="setTrade('landscaping')">Instant Greenscene</button>
-      <button class="pill-btn" onclick="setTrade('plumbing')">Brisbane Drain Cleaning</button>
-    </div>
-  </div>
-
-  <!-- Top Trust & Credibility Strip -->
-  <div class="trust-strip">
-    <div class="trust-items">
-      <div class="trust-item"><span class="live-dot"></span> QBCC LICENSED CONTRACTOR</div>
-      <div>MASTER BUILDERS / HIA AFFILIATED</div>
-      <div>$20M PUBLIC LIABILITY INSURED</div>
-    </div>
-    <div id="strip-region">REGION: TAMPA, FL, US</div>
-  </div>
-
-  <!-- Header -->
-  <header>
-    <div class="brand-identity">
-      <div class="brand-avatar" id="brand-avatar">B</div>
-      <div>
-        <div class="brand-name" id="brand-name">Big Jerry's Fencing</div>
-        <div class="brand-meta" id="brand-meta">Tampa, FL, US</div>
-      </div>
-    </div>
-    <div class="header-actions">
-      <a href="tel:0481166802" class="direct-call" id="phone-link">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span id="phone-label">0481 166 802</span>
-      </a>
-      <a href="#quote-engine" class="btn-scope">Instant Scope Quote</a>
-    </div>
-  </header>
-
-  <div class="content-shell">
-    <!-- Hero & Estimator Split -->
-    <div class="hero-split">
-      <div>
-        <div class="eyebrow-tag" id="eyebrow-tag">PERIMETER & SECURITY INSTALLATIONS</div>
-        <h1 class="headline-display" id="headline-display">Precision Boundary & Architectural Fencing.</h1>
-        <p class="lead-paragraph" id="lead-paragraph">Colorbond?, timber acoustic barriers, automated gates, and certified boundary fencing installations. Tailored for Tampa, FL, US projects.</p>
-
-        <div class="standards-grid" id="standards-grid"></div>
-      </div>
-
-      <!-- Scope Calculator Engine -->
-      <div class="calculator-card" id="quote-engine">
-        <div class="card-heading" id="calc-title">Instant Fencing Scope Calculator</div>
-        <div class="card-caption">Configure job requirements for instant dispatch estimation.</div>
-
-        <label class="selector-label" id="label-choice-a">Select Fencing Perimeter Scope</label>
-        <div class="choice-grid" id="grid-choice-a"></div>
-
-        <label class="selector-label" id="label-choice-b">Approximate Area (m²)</label>
-        <div class="choice-grid" id="grid-choice-b"></div>
-
-        <div class="estimate-range-box">
-          <span class="est-label">Estimated Range:</span>
-          <span class="est-value" id="est-range">$4,200 – $6,800 + GST</span>
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="trust-badges">
+            <span class="trust-badge-active">QBCC LICENSED CONTRACTOR</span>
+            <span>MASTER BUILDERS / HIA AFFILIATED</span>
+            <span>$20M PUBLIC LIABILITY INSURED</span>
         </div>
-
-        <label class="selector-label">Installation Suburb &amp; Contact Mobile</label>
-        <input type="text" class="phone-input" id="client-contact" placeholder="e.g. Tampa, FL, US - (813) 864-4858">
-
-        <button type="button" class="btn-submit-scope" id="btn-submit-scope" onclick="handleQuoteSubmit(this)">REQUEST SCOPE ASSESSMENT &rarr;</button>
-      </div>
+        <div>REGION: TAMPA, FL, AU</div>
     </div>
 
-    <!-- Proof Metrics Strip -->
-    <div class="proof-banner" id="proof-banner"></div>
+    <!-- Navigation Header -->
+    <header>
+        <div class="brand">
+            <div class="avatar">B</div>
+            <div class="brand-meta">
+                <h1>Big Jerry's Fencing</h1>
+                <p>Tampa, FL DIRECT CONTRACTOR PORTAL</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="tel:(813) 864-4858" class="btn-phone">📞 (813) 864-4858</a>
+            <a href="#quote" class="btn-primary">Instant Scope Quote</a>
+        </div>
+    </header>
 
-    <!-- Verified Projects Showcase -->
-    <div class="projects-header">
-      <div>
-        <div class="controls-label" style="margin-bottom: 4px;">Recent Regional Works</div>
-        <h2 class="section-title">Verified Field Deliverables</h2>
-      </div>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div>
+                <span class="trade-pill">PERIMETER & ARCHITECTURAL BOUNDARY FENCING</span>
+                <h2>Precision Boundary & Security Fencing.</h2>
+                <p class="lead">Colorbond? steel boundaries, acoustic timber fencing, security perimeter gates, and certified pool-safe barrier installations. Tailored for Tampa, FL projects.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <span>Code Compliant</span>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4.9 ★</h3>
+                        <span>Verified Reviews (65)</span>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Direct</h3>
+                        <span>Priority Dispatch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Calculator Form -->
+            <div class="calc-box" id="quote">
+                <div class="calc-header">
+                    <h3>Instant Fencing Scope Calculator</h3>
+                    <p>Select specifications for immediate dispatch estimation.</p>
+                </div>
+                <div class="calc-group">
+                    <label>Select Fencing Perimeter Scope</label>
+                    <div class="pill-grid">
+                        <div class="pill-option active" onclick="setOption(this, 1.0)">Colorbond? Standard (1.8m)</div>
+                        <div class="pill-option" onclick="setOption(this, 1.35)">Treated Hardwood Acoustic</div>
+                        <div class="pill-option" onclick="setOption(this, 1.85)">Automated Sliding Gate Spec</div>
+                    </div>
+                </div>
+                <div class="calc-group">
+                    <label>Linear Run Length</label>
+                    <div class="pill-grid">
+                        <div class="pill-option active" onclick="setSize(this, 1.0)">Standard</div>
+                        <div class="pill-option" onclick="setSize(this, 1.6)">Medium Run</div>
+                        <div class="pill-option" onclick="setSize(this, 2.5)">Full Property</div>
+                    </div>
+                </div>
+
+                <div class="estimate-banner">
+                    <span>Dynamic Scope Estimate:</span>
+                    <strong id="display-price">$3,400 ? $6,800 + GST</strong>
+                </div>
+
+                <form action="https://api.web3forms.com/submit" method="POST" class="calc-form">
+                    <input type="hidden" name="access_key" value="64dcff26-cda1-4475-816d-3174241e7dbe">
+                    <input type="hidden" name="subject" value="⚡ NEW COMMERCIAL INQUIRY: Big Jerry's Fencing">
+                    <input type="hidden" name="contractor" value="Big Jerry's Fencing">
+                    <input type="hidden" name="selected_scope" id="scope_input" value="Colorbond? Standard (1.8m)">
+                    <input type="text" name="phone" placeholder="Your Direct Phone Number" required>
+                    <input type="text" name="suburb" placeholder="Installation Suburb / Postcode" value="Tampa, FL" required>
+                    <button type="submit" class="btn-submit">Request Scope Assessment</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Service Tiers -->
+        <section>
+            <div class="section-title">
+                <h3>Certified Trade Scope Specifications</h3>
+                <p>Standardized, commercial-grade options designed for long-term durability and compliance.</p>
+            </div>
+            <div class="tiers-grid">
+                <div class="tier-card">
+                    <div>
+                        <h4>Boundary Colorbond?</h4>
+                        <div class="tier-price">$110 ? $145 / lm</div>
+                        <ul class="tier-features">
+                            <li>Genuine BlueScope? Steel</li>
+                            <li>Deep Post Footing Concreting</li>
+                            <li>Standard Site Assessment</li>
+                            <li>Full Clean Up & Disposal</li>
+                        </ul>
+                    </div>
+                    <a href="#quote" class="btn-primary" style="text-align: center;">Select Spec</a>
+                </div>
+                <div class="tier-card featured">
+                    <div>
+                        <h4>Acoustic Timber Lap & Cap</h4>
+                        <div class="tier-price">$160 ? $210 / lm</div>
+                        <ul class="tier-features">
+                            <li>H4 Treated Pine Framing</li>
+                            <li>Noise-Damping Double Layer</li>
+                            <li>Architectural Grade Materials</li>
+                            <li>Priority Scheduling Guarantee</li>
+                        </ul>
+                    </div>
+                    <a href="#quote" class="btn-primary" style="text-align: center;">Select Spec</a>
+                </div>
+                <div class="tier-card">
+                    <div>
+                        <h4>Commercial Perimeter & Automation</h4>
+                        <div class="tier-price">$6,500 ? $14,000</div>
+                        <ul class="tier-features">
+                            <li>Italian Automation Motor & Remotes</li>
+                            <li>Keypad & Intercom Access Control</li>
+                            <li>Engineered Structural Warranty</li>
+                            <li>Comprehensive Council Sign-Off</li>
+                        </ul>
+                    </div>
+                    <a href="#quote" class="btn-primary" style="text-align: center;">Select Spec</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Reviews Section -->
+        <section>
+            <div class="section-title">
+                <h3>Verified Project Reviews</h3>
+                <p>Real feedback from local property owners and commercial asset managers in Tampa, FL.</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"The quote assessment was clear and accurate right from the start. Job was finished two days ahead of schedule without surprise variations."</p>
+                    <div class="reviewer-meta">
+                        <span>Mark T. — Residential Client</span>
+                        <span>Verified Project</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"Exceptional communication and high-grade execution. Council compliance and structural specs were completely signed off without friction."</p>
+                    <div class="reviewer-meta">
+                        <span>Sarah L. — Property Manager</span>
+                        <span>Verified Project</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p>"Professional, clean site discipline, and transparent rates. The online scope calculator got us exact figures before work commenced."</p>
+                    <div class="reviewer-meta">
+                        <span>David B. — Commercial Owner</span>
+                        <span>Verified Project</span>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="projects-grid" id="projects-grid"></div>
-  </div>
 
-  <script>
-    const PORTALS = {
-      concreting: {
-        name: "Big Jerry's Fencing",
-        phone: "0481 166 802",
-        region: "North Brisbane & Moreton Bay",
-        accent: "#f59e0b",
-        glow: "rgba(245, 158, 11, 0.25)",
-        tag: "PERIMETER & SECURITY INSTALLATIONS",
-        h1: "Engineered Slabs, Crossovers & Designer Aggregate.",
-        desc: "Colorbond?, timber acoustic barriers, automated gates, and certified boundary fencing installations. Tailored for Tampa, FL, US projects.",
-        standards: [
-          "AS 3600 Concrete Structures Compliant",
-          "SL72 / SL82 Deformed Mesh Reo",
-          "FCR Base Prep & Laser Levelled",
-          "10-Year Structural Integrity Warranty"
-        ],
-        calcTitle: "Instant Fencing Scope Calculator",
-        lblA: "Select Fencing Perimeter Scope",
-        optsA: ["Exposed Aggregate Driveway", "House / Shed Slab Pour", "Council Crossover Pour", "Plain Broom Finish"],
-        lblB: "Approximate Area (m²)",
-        optsB: ["Under 40 m²", "40 - 80 m²", "80 - 150 m²", "150+ m² Commercial"],
-        range: "$4,200 – $6,800 + GST",
-        proof: [["32 MPa", "Minimum Pour Strength"], ["48+", "5-Star Local Reviews"], ["15 Mins", "Fast Measure Response"]],
-        projects: [
-          { type: "EXPOSED AGGREGATE", title: "North Lakes Dual Driveway", desc: "65m² Salt & Pepper aggregate with charcoal oxide and dual coats of solvent-based acrylic sealer.", meta: "COMPLETED IN 3 DAYS" },
-          { type: "ENGINEERED SLAB", title: "Burpengary Workshop Slab", desc: "120m² 32 MPa slab with SL82 mesh reo, internal perimeter footings, and saw-cut expansion joints.", meta: "COUNCIL CERTIFIED" },
-          { type: "COUNCIL CROSSOVER", title: "Redcliffe Crossover Pour", desc: "Heavy-duty crossover compliant with Moreton Bay Regional Council standard drawings.", meta: "PASSED FIRST INSPECTION" }
-        ]
-      },
-      fencing: {
-        name: "Harding Fencing",
-        phone: "0410 697 186",
-        region: "Kallangur & North Lakes",
-        accent: "#f97316",
-        glow: "rgba(249, 115, 22, 0.25)",
-        tag: "ARCHITECTURAL BOUNDARY INSTALLATIONS",
-        h1: "Designer Hardwood Batten & Colorbond® Enclosures.",
-        desc: "Custom acoustic boundary walls, motorized cantilever driveway gates, and full QBCC-compliant residential and commercial enclosures.",
-        standards: [
-          "Genuine Bluescope Colorbond® Steel",
-          "Hardwood Batten & Concealed Fixings",
-          "Italian Motorised Sliding Gates",
-          "Engineered Acoustic Barrier Rating"
-        ],
-        calcTitle: "Instant Boundary & Gate Estimator",
-        lblA: "Select Boundary Style",
-        optsA: ["Colorbond® Perimeter", "Architectural Timber Slat", "Sliding Driveway Gate", "Acoustic Sound Barrier"],
-        lblB: "Approximate Boundary Length",
-        optsB: ["Under 25 Metres", "25 - 50 Metres", "50 - 100 Metres", "100+ Metres Commercial"],
-        range: "$3,100 – $5,400 + GST",
-        proof: [["100%", "QBCC Compliant"], ["52+", "Verified Client Ratings"], ["10-Yr", "Bluescope Steel Warranty"]],
-        projects: [
-          { type: "COLORBOND® BOUNDARY", title: "Mango Hill Perimeter", desc: "48 metres of Monument® Colorbond with custom plinth retaining sleepers and post caps.", meta: "COMPLETED IN 2 DAYS" },
-          { type: "AUTOMATED GATE", title: "Narangba Cantilever Gate", desc: "5.2m architectural aluminium slat sliding gate paired with a heavy-duty Italian motor system.", meta: "DUAL REMOTES + KEYPAD" },
-          { type: "TIMBER SLAT", title: "Redcliffe Privacy Screen", desc: "Intergrain-treated spotted gum horizontal battens with marine-grade stainless fixings.", meta: "CUSTOM FABRICATION" }
-        ]
-      },
-      roofing: {
-        name: "D & B Roof Repairs",
-        phone: "0421 833 301",
-        region: "Kippa-Ring & Redcliffe",
-        accent: "#06b6d4",
-        glow: "rgba(6, 182, 212, 0.25)",
-        tag: "CERTIFIED ROOF RESTORATION & CONVERSIONS",
-        h1: "Storm-Rated Colorbond® Re-Roofing & Tile Restorations.",
-        desc: "Engineered leak isolation, flexible pointing, 3-coat high-build membrane application, and turnkey metal conversions for Queensland homes.",
-        standards: [
-          "Colorbond® Ultra for Coastal Salt Zones",
-          "High-Build Membrane Coating (3-Coat)",
-          "Flexible Pointing & Valley Replacements",
-          "Master Roofers Queensland Insured"
-        ],
-        calcTitle: "Instant Roof Assessment Estimator",
-        lblA: "Select Service Required",
-        optsA: ["Full Tile Restoration", "Tile to Colorbond® Conversion", "Urgent Leak Isolation", "Gutter & Whirlybird Upgrade"],
-        lblB: "Estimated Roof Footprint",
-        optsB: ["Single Storey (Under 180m²)", "Large Single (180 - 260m²)", "Double Storey Home", "Commercial Premises"],
-        range: "$3,800 – $7,200 + GST",
-        proof: [["10-Year", "Membrane Guarantee"], ["100%", "Leak Isolation Tested"], ["64+", "5-Star Regional Reviews"]],
-        projects: [
-          { type: "FULL RESTORATION", title: "Scarborough Coastal Roof", desc: "Complete high-pressure wash, ridge re-bedding in flexible mortar, and 3-coat charcoal membrane.", meta: "10-YEAR WARRANTY" },
-          { type: "COLORBOND CONVERSION", title: "Clontarf Metal Re-Roof", desc: "Removed failed cement tiles, installed heavy-duty roof battens and 0.42 BMT Colorbond sheeting.", meta: "STORM-RATED SPECS" },
-          { type: "LEAK DIAGNOSTIC", title: "Rothwell Valley Replacement", desc: "Isolated persistent leak to cracked valley irons; replaced with Colorbond valley and weep seals.", meta: "SAME-DAY REPAIR" }
-        ]
-      },
-      landscaping: {
-        name: "Instant Greenscene",
-        phone: "0408 770 646",
-        region: "Narangba & Northside",
-        accent: "#10b981",
-        glow: "rgba(16, 185, 129, 0.25)",
-        tag: "STRUCTURAL RETAINING & OUTDOOR LIVING",
-        h1: "Engineered Sleeper Walls & Alfresco Paving.",
-        desc: "Certified concrete sleeper retaining walls, turnkey earthmoving, automated agricultural drainage, and luxury outdoor stone paving.",
-        standards: [
-          "Galvanised UC Steel Posts (H-Beam)",
-          "Engineered Form 15/16 Certification",
-          "Ag-Pipe & Geotextile Drainage Systems",
-          "Commercial Laser Site Grading"
-        ],
-        calcTitle: "Structural Landscaping Estimator",
-        lblA: "Select Project Scope",
-        optsA: ["Concrete Sleeper Retaining", "Alfresco Stone Paving", "Turf & Automated Irrigation", "Complete Yard Groundwork"],
-        lblB: "Approximate Scope Dimensions",
-        optsB: ["Under 1m High / 20m Long", "1m - 1.5m High (Engineered)", "Over 1.5m Retaining Wall", "Full Acreage Earthworks"],
-        range: "$5,500 – $9,800 + GST",
-        proof: [["Form 15/16", "Engineer Certified"], ["Turnkey", "Bobcat & Tipper Fleet"], ["41+", "Verified Yard Reviews"]],
-        projects: [
-          { type: "RETAINING WALL", title: "North Lakes Tiered Wall", desc: "1.4m engineered concrete sleeper wall featuring galvanised H-beams and 100mm slotted ag-drain.", meta: "FORM 15 CERTIFIED" },
-          { type: "STONE PAVING", title: "Cashmere Pool Alfresco", desc: "85m² honed porcelain paving laid over concrete screed with automated surface channel drains.", meta: "NON-SLIP FINISH" },
-          { type: "COMPLETE GROUNDS", title: "Dayboro Turf & Groundwork", desc: "Laser graded 400m² backyard, supplied enriched topsoil, and laid premium Sir Walter Buffalo.", meta: "TURNKEY BUILD" }
-        ]
-      },
-      plumbing: {
-        name: "Brisbane Drain Cleaning",
-        phone: "1300 635 914",
-        region: "Brisbane Metro",
-        accent: "#3b82f6",
-        glow: "rgba(59, 130, 246, 0.25)",
-        tag: "EMERGENCY HYDRO-JET & DRAINAGE SPECIALISTS",
-        h1: "5,000 PSI Hydro-Jetting & CCTV Trenchless Relining.",
-        desc: "24/7 priority emergency response for persistent blocked drains, hot water failures, and tree-root penetration across Brisbane.",
-        standards: [
-          "Self-Levelling CCTV Colour Cameras",
-          "5,000 PSI Water Jetter Clearing",
-          "No-Dig Epoxy Trenchless Relining",
-          "Master Plumbers Association QLD"
-        ],
-        calcTitle: "24/7 Rapid Intake & Drain Diagnostic",
-        lblA: "Select Issue Type",
-        optsA: ["Active Sewer / Stormwater Blockage", "CCTV Camera Inspection Survey", "Emergency Hot Water Failure", "Pipe Relining Consultation"],
-        lblB: "Property Classification",
-        optsB: ["Residential Home", "Townhouse / Multi-Unit", "Commercial Kitchen / Factory", "Acreage / Rural Boundary"],
-        range: "$350 – $850 (Diagnostics)",
-        proof: [["60 Min", "Emergency Dispatch"], ["100% Clear", "CCTV Camera Verified"], ["89+", "5-Star Drain Reviews"]],
-        projects: [
-          { type: "HYDRO-JETTING", title: "Chermside Sewer Blockage", desc: "Cut through heavy ficus root intrusion at 14 metres using root-cutting turbine nozzle on 5,000 PSI jetter.", meta: "CLEARED IN 45 MINS" },
-          { type: "PIPE RELINING", title: "Aspley Trenchless Repair", desc: "Lined 8 metres of cracked earthenware pipe beneath existing driveway without digging.", meta: "50-YEAR PRODUCT LIFE" },
-          { type: "HOT WATER UPGRADE", title: "Albany Creek Heat Pump", desc: "Replaced blown electric storage unit with energy-efficient Rheem heat pump hot water system.", meta: "SAME-DAY CHANGEOVER" }
-        ]
-      }
-    };
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Big Jerry's Fencing. Authorized Contractor Showroom & Direct Dispatch Hub.</p>
+        <p style="margin-top: 6px; font-size: 0.7rem; color: #64748b;">All trade services certified under local statutory authorities. Direct contractor quotes are indicative estimates based on submitted specs.</p>
+    </footer>
 
-    function setTrade(key) {
-      const data = PORTALS[key];
-      document.documentElement.style.setProperty('--accent', data.accent);
-      document.documentElement.style.setProperty('--accent-glow', data.glow);
+    <script>
+        let specMultiplier = 1.0;
+        let sizeMultiplier = 1.0;
+        const baseMin = 3400;
+        const baseMax = 6800;
+        const curr = "$";
 
-      document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+        function setOption(el, mult) {
+            el.parentElement.querySelectorAll('.pill-option').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+            specMultiplier = mult;
+            document.getElementById('scope_input').value = el.innerText;
+            updateTotal();
+        }
 
-      document.getElementById('brand-avatar').innerText = data.name[0];
-      document.getElementById('brand-name').innerText = data.name;
-      document.getElementById('brand-meta').innerText = data.region;
-      document.getElementById('strip-region').innerText = 'REGION: ' + data.region.toUpperCase();
+        function setSize(el, mult) {
+            el.parentElement.querySelectorAll('.pill-option').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+            sizeMultiplier = mult;
+            updateTotal();
+        }
 
-      document.getElementById('phone-label').innerText = data.phone;
-      document.getElementById('phone-link').href = 'tel:' + data.phone.replace(/[^0-9]/g, '');
-
-      document.getElementById('eyebrow-tag').innerText = data.tag;
-      document.getElementById('headline-display').innerText = data.h1;
-      document.getElementById('lead-paragraph').innerText = data.desc;
-
-      document.getElementById('standards-grid').innerHTML = data.standards.map(s => `
-        <div class="standard-item">
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span>${s}</span>
-        </div>
-      `).join('');
-
-      document.getElementById('calc-title').innerText = data.calcTitle;
-      document.getElementById('label-choice-a').innerText = data.lblA;
-      document.getElementById('label-choice-b').innerText = data.lblB;
-      document.getElementById('est-range').innerText = data.range;
-
-      document.getElementById('grid-choice-a').innerHTML = data.optsA.map((o, i) => `
-        <button type="button" class="choice-btn ${i === 0 ? 'active' : ''}" onclick="toggleChoice(this)">${o}</button>
-      `).join('');
-
-      document.getElementById('grid-choice-b').innerHTML = data.optsB.map((s, i) => `
-        <button type="button" class="choice-btn ${i === 0 ? 'active' : ''}" onclick="toggleChoice(this)">${s}</button>
-      `).join('');
-
-      document.getElementById('proof-banner').innerHTML = data.proof.map(p => `
-        <div>
-          <div class="metric-data">${p[0]}</div>
-          <div class="metric-caption">${p[1]}</div>
-        </div>
-      `).join('');
-
-      document.getElementById('projects-grid').innerHTML = data.projects.map(proj => `
-        <div class="project-card">
-          <div>
-            <div class="proj-type">${proj.type}</div>
-            <div class="proj-title">${proj.title}</div>
-            <div class="proj-detail">${proj.desc}</div>
-          </div>
-          <div class="proj-meta">
-            <span>VERIFIED SPECS</span>
-            <span style="color:var(--accent);">${proj.meta}</span>
-          </div>
-        </div>
-      `).join('');
-
-      const btn = document.getElementById('btn-submit-scope');
-      btn.innerText = 'REQUEST SCOPE ASSESSMENT →';
-      btn.style.background = data.accent;
-    }
-
-    function toggleChoice(el) {
-      el.parentElement.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
-    }
-
-    function handleQuoteSubmit(btn) {
-      const input = document.getElementById('client-contact');
-      if (!input.value.trim()) {
-        input.focus();
-        input.style.borderColor = '#ef4444';
-        return;
-      }
-      btn.innerText = 'Scope Dispatched to Lead Estimator ✓';
-      btn.style.background = '#10b981';
-      btn.style.color = '#ffffff';
-    }
-
-    // Initialize on Concreting
-    setTrade('concreting');
-  </script>
+        function updateTotal() {
+            const min = Math.round(baseMin * specMultiplier * sizeMultiplier / 50) * 50;
+            const max = Math.round(baseMax * specMultiplier * sizeMultiplier / 50) * 50;
+            document.getElementById('display-price').innerText = curr + min.toLocaleString() + " – " + curr + max.toLocaleString() + " + GST";
+        }
+    </script>
 </body>
 </html>
