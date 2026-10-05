@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stockport Resin Driveways | Interactive Scope Estimator</title>
@@ -20,12 +19,9 @@
     .price-val { font-size: 28px; font-weight: 900; color: #f59e0b; }
     .input-box { width: 100%; box-sizing: border-box; background: #06090e; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 13px; color: #fff; margin-bottom: 12px; font-size: 14px; }
     .btn { width: 100%; background: #f59e0b; color: #000; font-weight: 900; border: none; padding: 16px; border-radius: 6px; cursor: pointer; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
-    
-            <div class="claim-box">
-              <div class="claim-link">Are you the business owner of Stockport Resin Driveways?</div>
-              <a href="https://buy.stripe.com/test_placeholder?client_ref=Stockport_Resin_Driveways" target="_blank" class="claim-btn">? Connect This Calculator To Your Own Domain ($297 Setup)</a>
-            </div>
-            
+    .claim-box { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+    .claim-link { color: #8b9bb4; font-size: 12px; }
+    .claim-btn { display: inline-block; margin-top: 10px; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff; padding: 9px 18px; border-radius: 6px; font-size: 12px; text-decoration: none; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -33,13 +29,13 @@
     <img src="http://stockportresindriveways.co.uk/wp-content/uploads/2024/04/SRD_logo.png" style="max-height: 48px; margin-bottom: 12px; display: block;" alt="Logo">
     <div class="tag">PATTERN IMPRINTED & GROUNDWORKS</div>
     <h1>Stockport Resin Driveways</h1>
-    <div class="sub">Stockport, UK £ Interactive Scope Portal</div>
-    <div class="rating-badge">? 4.6 Rating £ 34 Google Reviews</div>
+    <div class="sub">Stockport, UK • Interactive Scope Portal</div>
+    <div class="rating-badge">★ 4.6 Rating • 34 Google Reviews</div>
 
     <div class="slider-card">
       <div class="slider-title">
         <span>Driveway Area (m²)</span>
-        <span id="unit-val" style="color: #f59e0b;">50 m£</span>
+        <span id="unit-val" style="color: #f59e0b;">50 m²</span>
       </div>
       <input type="range" class="range-input" id="scope-slider" min="25" max="120" value="50" oninput="updatePricing()">
       <div class="price-display">
@@ -50,26 +46,32 @@
 
     <form action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="952d346b-6311-403f-bdd7-1c585d2afe94">
-      <input type="hidden" name="subject" value="?? DIRECT LEAD DISPATCH: Stockport Resin Driveways">
+      <input type="hidden" name="subject" value="🚨 DIRECT LEAD DISPATCH: Stockport Resin Driveways">
       <input type="hidden" name="Contractor" value="Stockport Resin Driveways">
-      <input type="hidden" id="form-scope-value" name="Selected_Scope" value="50 m£">
+      <input type="hidden" id="form-scope-value" name="Selected_Scope" value="50 m²">
       <input type="hidden" id="form-estimate-value" name="Estimated_Total" value="">
       <input type="text" class="input-box" name="Client_Contact" placeholder="Your Direct Phone Number" required>
       <input type="text" class="input-box" name="Job_Location" placeholder="Project City / Postcode / Zip" required>
-      <button type="submit" class="btn">REQUEST SCOPE ASSESSMENT ?</button>
+      <button type="submit" class="btn">REQUEST SCOPE ASSESSMENT →</button>
     </form>
+    
+            <div class="claim-box">
+              <div class="claim-link">Are you the business owner of Stockport Resin Driveways?</div>
+              <a href="https://buy.stripe.com/test_placeholder?client_ref=Stockport_Resin_Driveways" target="_blank" class="claim-btn">⚡ Connect This Calculator To Your Own Domain ($297 Setup)</a>
+            </div>
+            
   </div>
 
   <script>
     const rate = 90;
     const curr = "£";
-    const unit = "m£";
+    const unit = "m²";
     function updatePricing() {
       const val = document.getElementById('scope-slider').value;
       document.getElementById('unit-val').innerText = val + ' ' + unit;
       const low = Math.round(val * rate * 0.9);
       const high = Math.round(val * rate * 1.15);
-      const priceStr = curr + low.toLocaleString() + ' - ' + curr + high.toLocaleString();
+      const priceStr = curr + low.toLocaleString() + ' – ' + curr + high.toLocaleString();
       document.getElementById('price-target').innerText = priceStr;
       document.getElementById('form-scope-value').value = val + ' ' + unit;
       document.getElementById('form-estimate-value').value = priceStr;

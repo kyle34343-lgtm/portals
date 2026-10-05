@@ -1,80 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Headingley Roofing | Interactive Scope Estimator</title>
+  <title>Tier-1 Australian Trade Showroom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    body { background: #06090e; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; }
-    .card { max-width: 620px; margin: 20px auto; background: #0e1420; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 32px; box-shadow: 0 12px 35px rgba(0,0,0,0.55); }
-    .tag { color: #06b6d4; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
-    h1 { font-size: 26px; margin: 0 0 6px 0; }
-    .sub { color: #8b9bb4; font-size: 13px; margin-bottom: 14px; }
-    .rating-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: #f59e0b; font-weight: 700; margin-bottom: 20px; }
-    .slider-card { background: #141c2c; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 22px; }
-    .slider-title { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 12px; }
-    .range-input { width: 100%; -webkit-appearance: none; background: #26334d; height: 8px; border-radius: 4px; outline: none; }
-    .range-input::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #06b6d4; cursor: pointer; }
-    .price-display { margin-top: 14px; text-align: center; background: #090e17; border: 1px solid rgba(255,255,255,0.06); padding: 14px; border-radius: 8px; }
-    .price-val { font-size: 28px; font-weight: 900; color: #06b6d4; }
-    .input-box { width: 100%; box-sizing: border-box; background: #06090e; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 13px; color: #fff; margin-bottom: 12px; font-size: 14px; }
-    .btn { width: 100%; background: #06b6d4; color: #000; font-weight: 900; border: none; padding: 16px; border-radius: 6px; cursor: pointer; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
-    
-            <div class="claim-box">
-              <div class="claim-link">Are you the business owner of Headingley Roofing?</div>
-              <a href="https://buy.stripe.com/test_placeholder?client_ref=Headingley_Roofing" target="_blank" class="claim-btn">? Connect This Calculator To Your Own Domain ($297 Setup)</a>
-            </div>
-            
+    :root {
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.25);
+      --bg-base: #06090e;
+      --surface-1: #0e1420;
+      --surface-2: #141c2c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(255, 255, 255, 0.18);
+      --text: #f8fafc;
+      --muted: #8b9bb4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      background: var(--bg-base);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Background architectural grid */
+    .grid-backdrop {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 50% 0%, var(--accent-glow) 0%, transparent 45%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Interactive Switcher Top Bar */
+    .top-controls {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(6, 9, 14, 0.9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .controls-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .switcher-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pill-btn:hover, .pill-btn.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* License and Trust Strip */
+    .trust-strip {
+      position: relative;
+      z-index: 10;
+      background: rgba(14, 20, 32, 0.6);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 48px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .trust-items { display: flex; gap: 24px; align-items: center; }
+    .trust-item { display: inline-flex; align-items: center; gap: 7px; }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    /* Main Navigation Header */
+    header {
+      position: relative;
+      z-index: 10;
+      padding: 18px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-identity { display: flex; align-items: center; gap: 14px; }
+    .brand-avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #000000;
+      transition: background 0.3s ease;
+    }
+    .brand-name { font-size: 20px; font-weight: 800; letter-spacing: -0.4px; }
+    .brand-meta { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+
+    .header-actions { display: flex; align-items: center; gap: 24px; }
+    .direct-call {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.2px;
+    }
+    .btn-scope {
+      background: var(--accent);
+      color: #000000;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 12px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .btn-scope:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    /* Layout Wrapper */
+    .content-shell {
+      position: relative;
+      z-index: 10;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 56px 48px 80px;
+    }
+
+    /* Hero Section */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: start;
+      margin-bottom: 72px;
+    }
+    .eyebrow-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .headline-display {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.2px;
+      margin-bottom: 20px;
+    }
+    .lead-paragraph {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .standards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .standard-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .standard-item svg { width: 18px; height: 18px; color: #10b981; flex-shrink: 0; }
+
+    /* Interactive Scope Calculator */
+    .calculator-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-focus);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .card-heading { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .card-caption { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .selector-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .choice-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .choice-btn.active, .choice-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    /* Live Estimation Output Preview */
+    .estimate-range-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px dashed var(--border-focus);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .est-label { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .est-value { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent); }
+
+    .phone-input {
+      width: 100%;
+      background: #06090e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 16px;
+      transition: border-color 0.2s ease;
+    }
+    .phone-input:focus { border-color: var(--accent); }
+
+    .btn-submit-scope {
+      width: 100%;
+      background: var(--accent);
+      color: #000000;
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      padding: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-submit-scope:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    /* Performance Proof Strip */
+    .proof-banner {
+      background: rgba(14, 20, 32, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .metric-data {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .metric-caption {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* Verified Recent Projects Section */
+    .projects-header {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .section-title { font-size: 24px; font-weight: 800; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .project-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .proj-type {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .proj-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .proj-detail { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
+    .proj-meta {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 990px) {
+      .hero-split { grid-template-columns: 1fr; gap: 40px; }
+      .proof-banner { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .content-shell { padding: 36px 20px 60px; }
+      header { padding: 16px 20px; }
+      .trust-strip { padding: 10px 20px; }
+      .headline-display { font-size: 34px; }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    
-    <div class="tag">NFRC CERTIFIED PITCHED & FLAT ROOFING</div>
-    <h1>Headingley Roofing</h1>
-    <div class="sub">Leeds, UK £ Interactive Scope Portal</div>
-    <div class="rating-badge">? 5 Rating £ 12 Google Reviews</div>
 
-    <div class="slider-card">
-      <div class="slider-title">
-        <span>Roof Surface Area (m²)</span>
-        <span id="unit-val" style="color: #06b6d4;">160 m£</span>
+  <div class="grid-backdrop"></div>
+
+  <!-- Interactive Controls Bar -->
+  <div class="top-controls" style="display:none;">
+    <span class="controls-label">Commercial Trade Showroom</span>
+    <div class="switcher-pills" style="display:none;">
+      <button class="pill-btn active" onclick="setTrade('concreting')">Headingley Roofing</button>
+      <button class="pill-btn" onclick="setTrade('fencing')">Harding Fencing</button>
+      <button class="pill-btn" onclick="setTrade('roofing')">D &amp; B Roofing</button>
+      <button class="pill-btn" onclick="setTrade('landscaping')">Instant Greenscene</button>
+      <button class="pill-btn" onclick="setTrade('plumbing')">Brisbane Drain Cleaning</button>
+    </div>
+  </div>
+
+  <!-- Top Trust & Credibility Strip -->
+  <div class="trust-strip">
+    <div class="trust-items">
+      <div class="trust-item"><span class="live-dot"></span> QBCC LICENSED CONTRACTOR</div>
+      <div>MASTER BUILDERS / HIA AFFILIATED</div>
+      <div>$20M PUBLIC LIABILITY INSURED</div>
+    </div>
+    <div id="strip-region">REGION: NORTH BRISBANE &amp; MORETON BAY</div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-identity">
+      <div class="brand-avatar" id="brand-avatar">H</div>
+      <div>
+        <div class="brand-name" id="brand-name">Headingley Roofing</div>
+        <div class="brand-meta" id="brand-meta">Leeds, UK</div>
       </div>
-      <input type="range" class="range-input" id="scope-slider" min="80" max="280" value="160" oninput="updatePricing()">
-      <div class="price-display">
-        <div style="font-size: 11px; text-transform: uppercase; color: #8b9bb4; letter-spacing: 0.8px; margin-bottom: 4px;">Dynamic Scope Estimate</div>
-        <div class="price-val" id="price-target">£0</div>
+    </div>
+    <div class="header-actions">
+      <a href="tel:0481166802" class="direct-call" id="phone-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span id="phone-label">+44 7770 902292</span>
+      </a>
+      <a href="#quote-engine" class="btn-scope">Instant Scope Quote</a>
+    </div>
+  </header>
+
+  <div class="content-shell">
+    <!-- Hero & Estimator Split -->
+    <div class="hero-split">
+      <div>
+        <div class="eyebrow-tag" id="eyebrow-tag">COMMERCIAL & RESIDENTIAL ROOFING</div>
+        <h1 class="headline-display" id="headline-display">Commercial & Residential Roofing Solutions.</h1>
+        <p class="lead-paragraph" id="lead-paragraph">Full scope precision workmanship, certified installations, and industry-grade roofing solutions for Leeds, UK properties.</p>
+
+        <div class="standards-grid" id="standards-grid"></div>
+      </div>
+
+      <!-- Scope Calculator Engine -->
+      <div class="calculator-card" id="quote-engine">
+        <div class="card-heading" id="calc-title">Instant Roofing Scope Calculator</div>
+        <div class="card-caption">Configure job requirements for instant dispatch estimation.</div>
+
+        <label class="selector-label" id="label-choice-a">Select Pour Profile</label>
+        <div class="choice-grid" id="grid-choice-a"></div>
+
+        <label class="selector-label" id="label-choice-b">Approximate Area (m²)</label>
+        <div class="choice-grid" id="grid-choice-b"></div>
+
+        <div class="estimate-range-box">
+          <span class="est-label">Estimated Range:</span>
+          <span class="est-value" id="est-range">$4,200 – $6,800 + GST</span>
+        </div>
+
+        <label class="selector-label">Installation Suburb &amp; Contact Mobile</label>
+        <input type="text" class="phone-input" id="client-contact" placeholder="e.g. Leeds - +44 7770 902292">
+
+        <button type="button" class="btn-submit-scope" id="btn-submit-scope" onclick="handleQuoteSubmit(this)">REQUEST SCOPE ASSESSMENT &rarr;</button>
       </div>
     </div>
 
-    <form action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="952d346b-6311-403f-bdd7-1c585d2afe94">
-      <input type="hidden" name="subject" value="?? DIRECT LEAD DISPATCH: Headingley Roofing">
-      <input type="hidden" name="Contractor" value="Headingley Roofing">
-      <input type="hidden" id="form-scope-value" name="Selected_Scope" value="160 m£">
-      <input type="hidden" id="form-estimate-value" name="Estimated_Total" value="">
-      <input type="text" class="input-box" name="Client_Contact" placeholder="Your Direct Phone Number" required>
-      <input type="text" class="input-box" name="Job_Location" placeholder="Project City / Postcode / Zip" required>
-      <button type="submit" class="btn">REQUEST SCOPE ASSESSMENT ?</button>
-    </form>
+    <!-- Proof Metrics Strip -->
+    <div class="proof-banner" id="proof-banner"></div>
+
+    <!-- Verified Projects Showcase -->
+    <div class="projects-header">
+      <div>
+        <div class="controls-label" style="margin-bottom: 4px;">Recent Regional Works</div>
+        <h2 class="section-title">Verified Field Deliverables</h2>
+      </div>
+    </div>
+    <div class="projects-grid" id="projects-grid"></div>
   </div>
 
   <script>
-    const rate = 32;
-    const curr = "£";
-    const unit = "m£";
-    function updatePricing() {
-      const val = document.getElementById('scope-slider').value;
-      document.getElementById('unit-val').innerText = val + ' ' + unit;
-      const low = Math.round(val * rate * 0.9);
-      const high = Math.round(val * rate * 1.15);
-      const priceStr = curr + low.toLocaleString() + ' - ' + curr + high.toLocaleString();
-      document.getElementById('price-target').innerText = priceStr;
-      document.getElementById('form-scope-value').value = val + ' ' + unit;
-      document.getElementById('form-estimate-value').value = priceStr;
+    const PORTALS = {
+      concreting: {
+        name: "Headingley Roofing",
+        phone: "+44 7770 902292",
+        region: "North Brisbane & Moreton Bay",
+        accent: "#f59e0b",
+        glow: "rgba(245, 158, 11, 0.25)",
+        tag: "COMMERCIAL & RESIDENTIAL ROOFING",
+        h1: "Engineered Slabs, Crossovers & Designer Aggregate.",
+        desc: "Full scope precision workmanship, certified installations, and industry-grade roofing solutions for Leeds, UK properties.",
+        standards: [
+          "AS 3600 Concrete Structures Compliant",
+          "SL72 / SL82 Deformed Mesh Reo",
+          "FCR Base Prep & Laser Levelled",
+          "10-Year Structural Integrity Warranty"
+        ],
+        calcTitle: "Instant Roofing Scope Calculator",
+        lblA: "Select Pour Profile",
+        optsA: ["Exposed Aggregate Driveway", "House / Shed Slab Pour", "Council Crossover Pour", "Plain Broom Finish"],
+        lblB: "Approximate Area (m²)",
+        optsB: ["Under 40 m²", "40 - 80 m²", "80 - 150 m²", "150+ m² Commercial"],
+        range: "$4,200 – $6,800 + GST",
+        proof: [["32 MPa", "Minimum Pour Strength"], ["48+", "5-Star Local Reviews"], ["15 Mins", "Fast Measure Response"]],
+        projects: [
+          { type: "EXPOSED AGGREGATE", title: "North Lakes Dual Driveway", desc: "65m² Salt & Pepper aggregate with charcoal oxide and dual coats of solvent-based acrylic sealer.", meta: "COMPLETED IN 3 DAYS" },
+          { type: "ENGINEERED SLAB", title: "Burpengary Workshop Slab", desc: "120m² 32 MPa slab with SL82 mesh reo, internal perimeter footings, and saw-cut expansion joints.", meta: "COUNCIL CERTIFIED" },
+          { type: "COUNCIL CROSSOVER", title: "Redcliffe Crossover Pour", desc: "Heavy-duty crossover compliant with Moreton Bay Regional Council standard drawings.", meta: "PASSED FIRST INSPECTION" }
+        ]
+      },
+      fencing: {
+        name: "Harding Fencing",
+        phone: "0410 697 186",
+        region: "Kallangur & North Lakes",
+        accent: "#f97316",
+        glow: "rgba(249, 115, 22, 0.25)",
+        tag: "ARCHITECTURAL BOUNDARY INSTALLATIONS",
+        h1: "Designer Hardwood Batten & Colorbond® Enclosures.",
+        desc: "Custom acoustic boundary walls, motorized cantilever driveway gates, and full QBCC-compliant residential and commercial enclosures.",
+        standards: [
+          "Genuine Bluescope Colorbond® Steel",
+          "Hardwood Batten & Concealed Fixings",
+          "Italian Motorised Sliding Gates",
+          "Engineered Acoustic Barrier Rating"
+        ],
+        calcTitle: "Instant Boundary & Gate Estimator",
+        lblA: "Select Boundary Style",
+        optsA: ["Colorbond® Perimeter", "Architectural Timber Slat", "Sliding Driveway Gate", "Acoustic Sound Barrier"],
+        lblB: "Approximate Boundary Length",
+        optsB: ["Under 25 Metres", "25 - 50 Metres", "50 - 100 Metres", "100+ Metres Commercial"],
+        range: "$3,100 – $5,400 + GST",
+        proof: [["100%", "QBCC Compliant"], ["52+", "Verified Client Ratings"], ["10-Yr", "Bluescope Steel Warranty"]],
+        projects: [
+          { type: "COLORBOND® BOUNDARY", title: "Mango Hill Perimeter", desc: "48 metres of Monument® Colorbond with custom plinth retaining sleepers and post caps.", meta: "COMPLETED IN 2 DAYS" },
+          { type: "AUTOMATED GATE", title: "Narangba Cantilever Gate", desc: "5.2m architectural aluminium slat sliding gate paired with a heavy-duty Italian motor system.", meta: "DUAL REMOTES + KEYPAD" },
+          { type: "TIMBER SLAT", title: "Redcliffe Privacy Screen", desc: "Intergrain-treated spotted gum horizontal battens with marine-grade stainless fixings.", meta: "CUSTOM FABRICATION" }
+        ]
+      },
+      roofing: {
+        name: "D & B Roof Repairs",
+        phone: "0421 833 301",
+        region: "Kippa-Ring & Redcliffe",
+        accent: "#06b6d4",
+        glow: "rgba(6, 182, 212, 0.25)",
+        tag: "CERTIFIED ROOF RESTORATION & CONVERSIONS",
+        h1: "Storm-Rated Colorbond® Re-Roofing & Tile Restorations.",
+        desc: "Engineered leak isolation, flexible pointing, 3-coat high-build membrane application, and turnkey metal conversions for Queensland homes.",
+        standards: [
+          "Colorbond® Ultra for Coastal Salt Zones",
+          "High-Build Membrane Coating (3-Coat)",
+          "Flexible Pointing & Valley Replacements",
+          "Master Roofers Queensland Insured"
+        ],
+        calcTitle: "Instant Roof Assessment Estimator",
+        lblA: "Select Service Required",
+        optsA: ["Full Tile Restoration", "Tile to Colorbond® Conversion", "Urgent Leak Isolation", "Gutter & Whirlybird Upgrade"],
+        lblB: "Estimated Roof Footprint",
+        optsB: ["Single Storey (Under 180m²)", "Large Single (180 - 260m²)", "Double Storey Home", "Commercial Premises"],
+        range: "$3,800 – $7,200 + GST",
+        proof: [["10-Year", "Membrane Guarantee"], ["100%", "Leak Isolation Tested"], ["64+", "5-Star Regional Reviews"]],
+        projects: [
+          { type: "FULL RESTORATION", title: "Scarborough Coastal Roof", desc: "Complete high-pressure wash, ridge re-bedding in flexible mortar, and 3-coat charcoal membrane.", meta: "10-YEAR WARRANTY" },
+          { type: "COLORBOND CONVERSION", title: "Clontarf Metal Re-Roof", desc: "Removed failed cement tiles, installed heavy-duty roof battens and 0.42 BMT Colorbond sheeting.", meta: "STORM-RATED SPECS" },
+          { type: "LEAK DIAGNOSTIC", title: "Rothwell Valley Replacement", desc: "Isolated persistent leak to cracked valley irons; replaced with Colorbond valley and weep seals.", meta: "SAME-DAY REPAIR" }
+        ]
+      },
+      landscaping: {
+        name: "Instant Greenscene",
+        phone: "0408 770 646",
+        region: "Narangba & Northside",
+        accent: "#10b981",
+        glow: "rgba(16, 185, 129, 0.25)",
+        tag: "STRUCTURAL RETAINING & OUTDOOR LIVING",
+        h1: "Engineered Sleeper Walls & Alfresco Paving.",
+        desc: "Certified concrete sleeper retaining walls, turnkey earthmoving, automated agricultural drainage, and luxury outdoor stone paving.",
+        standards: [
+          "Galvanised UC Steel Posts (H-Beam)",
+          "Engineered Form 15/16 Certification",
+          "Ag-Pipe & Geotextile Drainage Systems",
+          "Commercial Laser Site Grading"
+        ],
+        calcTitle: "Structural Landscaping Estimator",
+        lblA: "Select Project Scope",
+        optsA: ["Concrete Sleeper Retaining", "Alfresco Stone Paving", "Turf & Automated Irrigation", "Complete Yard Groundwork"],
+        lblB: "Approximate Scope Dimensions",
+        optsB: ["Under 1m High / 20m Long", "1m - 1.5m High (Engineered)", "Over 1.5m Retaining Wall", "Full Acreage Earthworks"],
+        range: "$5,500 – $9,800 + GST",
+        proof: [["Form 15/16", "Engineer Certified"], ["Turnkey", "Bobcat & Tipper Fleet"], ["41+", "Verified Yard Reviews"]],
+        projects: [
+          { type: "RETAINING WALL", title: "North Lakes Tiered Wall", desc: "1.4m engineered concrete sleeper wall featuring galvanised H-beams and 100mm slotted ag-drain.", meta: "FORM 15 CERTIFIED" },
+          { type: "STONE PAVING", title: "Cashmere Pool Alfresco", desc: "85m² honed porcelain paving laid over concrete screed with automated surface channel drains.", meta: "NON-SLIP FINISH" },
+          { type: "COMPLETE GROUNDS", title: "Dayboro Turf & Groundwork", desc: "Laser graded 400m² backyard, supplied enriched topsoil, and laid premium Sir Walter Buffalo.", meta: "TURNKEY BUILD" }
+        ]
+      },
+      plumbing: {
+        name: "Brisbane Drain Cleaning",
+        phone: "1300 635 914",
+        region: "Brisbane Metro",
+        accent: "#3b82f6",
+        glow: "rgba(59, 130, 246, 0.25)",
+        tag: "EMERGENCY HYDRO-JET & DRAINAGE SPECIALISTS",
+        h1: "5,000 PSI Hydro-Jetting & CCTV Trenchless Relining.",
+        desc: "24/7 priority emergency response for persistent blocked drains, hot water failures, and tree-root penetration across Brisbane.",
+        standards: [
+          "Self-Levelling CCTV Colour Cameras",
+          "5,000 PSI Water Jetter Clearing",
+          "No-Dig Epoxy Trenchless Relining",
+          "Master Plumbers Association QLD"
+        ],
+        calcTitle: "24/7 Rapid Intake & Drain Diagnostic",
+        lblA: "Select Issue Type",
+        optsA: ["Active Sewer / Stormwater Blockage", "CCTV Camera Inspection Survey", "Emergency Hot Water Failure", "Pipe Relining Consultation"],
+        lblB: "Property Classification",
+        optsB: ["Residential Home", "Townhouse / Multi-Unit", "Commercial Kitchen / Factory", "Acreage / Rural Boundary"],
+        range: "$350 – $850 (Diagnostics)",
+        proof: [["60 Min", "Emergency Dispatch"], ["100% Clear", "CCTV Camera Verified"], ["89+", "5-Star Drain Reviews"]],
+        projects: [
+          { type: "HYDRO-JETTING", title: "Chermside Sewer Blockage", desc: "Cut through heavy ficus root intrusion at 14 metres using root-cutting turbine nozzle on 5,000 PSI jetter.", meta: "CLEARED IN 45 MINS" },
+          { type: "PIPE RELINING", title: "Aspley Trenchless Repair", desc: "Lined 8 metres of cracked earthenware pipe beneath existing driveway without digging.", meta: "50-YEAR PRODUCT LIFE" },
+          { type: "HOT WATER UPGRADE", title: "Albany Creek Heat Pump", desc: "Replaced blown electric storage unit with energy-efficient Rheem heat pump hot water system.", meta: "SAME-DAY CHANGEOVER" }
+        ]
+      }
+    };
+
+    function setTrade(key) {
+      const data = PORTALS[key];
+      document.documentElement.style.setProperty('--accent', data.accent);
+      document.documentElement.style.setProperty('--accent-glow', data.glow);
+
+      document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.getElementById('brand-avatar').innerText = data.name[0];
+      document.getElementById('brand-name').innerText = data.name;
+      document.getElementById('brand-meta').innerText = data.region;
+      document.getElementById('strip-region').innerText = 'REGION: ' + data.region.toUpperCase();
+
+      document.getElementById('phone-label').innerText = data.phone;
+      document.getElementById('phone-link').href = 'tel:' + data.phone.replace(/[^0-9]/g, '');
+
+      document.getElementById('eyebrow-tag').innerText = data.tag;
+      document.getElementById('headline-display').innerText = data.h1;
+      document.getElementById('lead-paragraph').innerText = data.desc;
+
+      document.getElementById('standards-grid').innerHTML = data.standards.map(s => `
+        <div class="standard-item">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span>${s}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('calc-title').innerText = data.calcTitle;
+      document.getElementById('label-choice-a').innerText = data.lblA;
+      document.getElementById('label-choice-b').innerText = data.lblB;
+      document.getElementById('est-range').innerText = data.range;
+
+      document.getElementById('grid-choice-a').innerHTML = data.optsA.map((o, i) => `
+        <button type="button" class="choice-btn ${i === 0 ? 'active' : ''}" onclick="toggleChoice(this)">${o}</button>
+      `).join('');
+
+      document.getElementById('grid-choice-b').innerHTML = data.optsB.map((s, i) => `
+        <button type="button" class="choice-btn ${i === 0 ? 'active' : ''}" onclick="toggleChoice(this)">${s}</button>
+      `).join('');
+
+      document.getElementById('proof-banner').innerHTML = data.proof.map(p => `
+        <div>
+          <div class="metric-data">${p[0]}</div>
+          <div class="metric-caption">${p[1]}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('projects-grid').innerHTML = data.projects.map(proj => `
+        <div class="project-card">
+          <div>
+            <div class="proj-type">${proj.type}</div>
+            <div class="proj-title">${proj.title}</div>
+            <div class="proj-detail">${proj.desc}</div>
+          </div>
+          <div class="proj-meta">
+            <span>VERIFIED SPECS</span>
+            <span style="color:var(--accent);">${proj.meta}</span>
+          </div>
+        </div>
+      `).join('');
+
+      const btn = document.getElementById('btn-submit-scope');
+      btn.innerText = 'REQUEST SCOPE ASSESSMENT →';
+      btn.style.background = data.accent;
     }
-    updatePricing();
+
+    function toggleChoice(el) {
+      el.parentElement.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function handleQuoteSubmit(btn) {
+      const input = document.getElementById('client-contact');
+      if (!input.value.trim()) {
+        input.focus();
+        input.style.borderColor = '#ef4444';
+        return;
+      }
+      btn.innerText = 'Scope Dispatched to Lead Estimator ✓';
+      btn.style.background = '#10b981';
+      btn.style.color = '#ffffff';
+    }
+
+    // Initialize on Concreting
+    setTrade('concreting');
   </script>
 </body>
 </html>
