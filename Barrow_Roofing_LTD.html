@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barrow Roofing LTD | Interactive Scope Estimator</title>
+  <style>
+    body { background: #06090e; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; }
+    .card { max-width: 620px; margin: 20px auto; background: #0e1420; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 32px; box-shadow: 0 12px 35px rgba(0,0,0,0.55); }
+    .tag { color: #06b6d4; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    h1 { font-size: 26px; margin: 0 0 6px 0; }
+    .sub { color: #8b9bb4; font-size: 13px; margin-bottom: 14px; }
+    .rating-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: #f59e0b; font-weight: 700; margin-bottom: 20px; }
+    .slider-card { background: #141c2c; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 22px; }
+    .slider-title { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .range-input { width: 100%; -webkit-appearance: none; background: #26334d; height: 8px; border-radius: 4px; outline: none; }
+    .range-input::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #06b6d4; cursor: pointer; }
+    .price-display { margin-top: 14px; text-align: center; background: #090e17; border: 1px solid rgba(255,255,255,0.06); padding: 14px; border-radius: 8px; }
+    .price-val { font-size: 28px; font-weight: 900; color: #06b6d4; }
+    .input-box { width: 100%; box-sizing: border-box; background: #06090e; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 13px; color: #fff; margin-bottom: 12px; font-size: 14px; }
+    .btn { width: 100%; background: #06b6d4; color: #000; font-weight: 900; border: none; padding: 16px; border-radius: 6px; cursor: pointer; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+            <div class="claim-box">
+              <div class="claim-link">Are you the business owner of Barrow Roofing LTD?</div>
+              <a href="https://buy.stripe.com/test_placeholder?client_ref=Barrow_Roofing_LTD" target="_blank" class="claim-btn">? Connect This Calculator To Your Own Domain ($297 Setup)</a>
+            </div>
+            
+  </style>
+</head>
+<body>
+  <div class="card">
+    
+    <div class="tag">NFRC CERTIFIED PITCHED & FLAT ROOFING</div>
+    <h1>Barrow Roofing LTD</h1>
+    <div class="sub">Sheffield, UK ï¿½ Interactive Scope Portal</div>
+    <div class="rating-badge">? 5 Rating ï¿½ 28 Google Reviews</div>
+
+    <div class="slider-card">
+      <div class="slider-title">
+        <span>Roof Surface Area (mï¿½)</span>
+        <span id="unit-val" style="color: #06b6d4;">160 mï¿½</span>
+      </div>
+      <input type="range" class="range-input" id="scope-slider" min="80" max="280" value="160" oninput="updatePricing()">
+      <div class="price-display">
+        <div style="font-size: 11px; text-transform: uppercase; color: #8b9bb4; letter-spacing: 0.8px; margin-bottom: 4px;">Dynamic Scope Estimate</div>
+        <div class="price-val" id="price-target">ï¿½0</div>
+      </div>
+    </div>
+
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="952d346b-6311-403f-bdd7-1c585d2afe94">
+      <input type="hidden" name="subject" value="?? DIRECT LEAD DISPATCH: Barrow Roofing LTD">
+      <input type="hidden" name="Contractor" value="Barrow Roofing LTD">
+      <input type="hidden" id="form-scope-value" name="Selected_Scope" value="160 mï¿½">
+      <input type="hidden" id="form-estimate-value" name="Estimated_Total" value="">
+      <input type="text" class="input-box" name="Client_Contact" placeholder="Your Direct Phone Number" required>
+      <input type="text" class="input-box" name="Job_Location" placeholder="Project City / Postcode / Zip" required>
+      <button type="submit" class="btn">REQUEST SCOPE ASSESSMENT ?</button>
+    </form>
+  </div>
+
+  <script>
+    const rate = 32;
+    const curr = "ï¿½";
+    const unit = "mï¿½";
+    function updatePricing() {
+      const val = document.getElementById('scope-slider').value;
+      document.getElementById('unit-val').innerText = val + ' ' + unit;
+      const low = Math.round(val * rate * 0.9);
+      const high = Math.round(val * rate * 1.15);
+      const priceStr = curr + low.toLocaleString() + ' ï¿½ ' + curr + high.toLocaleString();
+      document.getElementById('price-target').innerText = priceStr;
+      document.getElementById('form-scope-value').value = val + ' ' + unit;
+      document.getElementById('form-estimate-value').value = priceStr;
+    }
+    updatePricing();
+  </script>
+</body>
+</html>

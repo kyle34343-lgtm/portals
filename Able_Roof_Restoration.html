@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Able Roof Restoration | Official Web Portal & Scope Estimator</title>
+  <style>
+    body { background: #06090e; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; }
+    .card { max-width: 620px; margin: 20px auto; background: #0e1420; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 32px; box-shadow: 0 12px 35px rgba(0,0,0,0.55); }
+    .tag { color: #06b6d4; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    h1 { font-size: 26px; margin: 0 0 6px 0; }
+    .sub { color: #8b9bb4; font-size: 13px; margin-bottom: 14px; }
+    .rating-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: #f59e0b; font-weight: 700; margin-bottom: 20px; }
+    .phone-badge { display: inline-block; background: #1e293b; border: 1px solid #334155; padding: 6px 12px; border-radius: 6px; font-size: 13px; margin-bottom: 20px; font-weight: bold; color: #e2e8f0; }
+    .slider-card { background: #141c2c; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 22px; }
+    .slider-title { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .range-input { width: 100%; -webkit-appearance: none; background: #26334d; height: 8px; border-radius: 4px; outline: none; }
+    .range-input::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #06b6d4; cursor: pointer; }
+    .price-display { margin-top: 14px; text-align: center; background: #090e17; border: 1px solid rgba(255,255,255,0.06); padding: 14px; border-radius: 8px; }
+    .price-val { font-size: 28px; font-weight: 900; color: #06b6d4; }
+    .input-box { width: 100%; box-sizing: border-box; background: #06090e; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 13px; color: #fff; margin-bottom: 12px; font-size: 14px; }
+    .btn { width: 100%; background: #06b6d4; color: #000; font-weight: 900; border: none; padding: 16px; border-radius: 6px; cursor: pointer; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .claim-box { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+    .claim-link { color: #8b9bb4; font-size: 12px; }
+    .claim-btn { display: inline-block; margin-top: 10px; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff; padding: 9px 18px; border-radius: 6px; font-size: 12px; text-decoration: none; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="tag">CERTIFIED ROOF RESTORATIONS</div>
+    <h1>Able Roof Restoration</h1>
+    <div class="sub">Sydney, AU • Verified Trade Services</div>
+    <div class="rating-badge">★ 4.9 Rating • 76 Google Reviews</div>
+    <div><span class="phone-badge">📞 Call Direct: +61 475 000 555</span></div>
+
+    <div class="slider-card">
+      <div class="slider-title">
+        <span>Roof Surface Area (m²)</span>
+        <span id="unit-val" style="color: #06b6d4;">200 m²</span>
+      </div>
+      <input type="range" class="range-input" id="scope-slider" min="100" max="350" value="200" oninput="updatePricing()">
+      <div class="price-display">
+        <div style="font-size: 11px; text-transform: uppercase; color: #8b9bb4; letter-spacing: 0.8px; margin-bottom: 4px;">Dynamic Scope Estimate</div>
+        <div class="price-val" id="price-target">$0</div>
+      </div>
+    </div>
+
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="952d346b-6311-403f-bdd7-1c585d2afe94">
+      <input type="hidden" name="subject" value="🚨 DIRECT LEAD DISPATCH: Able Roof Restoration">
+      <input type="hidden" name="Contractor" value="Able Roof Restoration">
+      <input type="hidden" id="form-scope-value" name="Selected_Scope" value="200 m²">
+      <input type="hidden" id="form-estimate-value" name="Estimated_Total" value="">
+      <input type="text" class="input-box" name="Client_Contact" placeholder="Your Direct Phone Number" required>
+      <input type="text" class="input-box" name="Job_Location" placeholder="Project City / Postcode / Zip" required>
+      <button type="submit" class="btn">REQUEST SCOPE ASSESSMENT →</button>
+    </form>
+
+    <div class="claim-box">
+      <div class="claim-link">Are you the owner of Able Roof Restoration?</div>
+      <a href="https://buy.stripe.com/test_placeholder" target="_blank" class="claim-btn">⚡ Make This Your Official Business Website ($297 Setup)</a>
+    </div>
+  </div>
+
+  <script>
+    const rate = 28;
+    const curr = "$";
+    const unit = "m²";
+    function updatePricing() {
+      const val = document.getElementById('scope-slider').value;
+      document.getElementById('unit-val').innerText = val + ' ' + unit;
+      const low = Math.round(val * rate * 0.9);
+      const high = Math.round(val * rate * 1.15);
+      const priceStr = curr + low.toLocaleString() + ' – ' + curr + high.toLocaleString();
+      document.getElementById('price-target').innerText = priceStr;
+      document.getElementById('form-scope-value').value = val + ' ' + unit;
+      document.getElementById('form-estimate-value').value = priceStr;
+    }
+    updatePricing();
+  </script>
+</body>
+</html>

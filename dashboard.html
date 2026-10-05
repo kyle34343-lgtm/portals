@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Trade Engine Autopilot Analytics</title>
+  <style>
+    body { background: #090d16; color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 25px; }
+    .container { max-width: 1050px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+    .stat-card { background: #111827; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px; }
+    .stat-label { color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700; }
+    .stat-val { font-size: 28px; font-weight: 900; margin-top: 6px; color: #f8fafc; }
+    table { width: 100%; border-collapse: collapse; background: #111827; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); font-size: 13px; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    th { background: #1f2937; color: #94a3b8; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+    .badge.sent { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+    .badge.replied { background: rgba(16, 185, 129, 0.25); color: #10b981; border: 1px solid #10b981; }
+    .badge.opt_out { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .badge.pending { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .preview-btn { color: #38bdf8; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-size: 22px;">? Lead Autopilot Operations Dashboard</h1>
+      <span style="color: #10b981; font-weight: bold;">? Active &amp; Autonomous (Cloud 24/7)</span>
+    </div>
+    <div class="grid">
+      <div class="stat-card"><div class="stat-label">Total Verified Leads</div><div class="stat-val">210</div></div>
+      <div class="stat-card"><div class="stat-label">In Sequence (Sent)</div><div class="stat-val">0</div></div>
+      <div class="stat-card" style="border-color: #10b981;"><div class="stat-label" style="color: #10b981;">Hot Replies</div><div class="stat-val" style="color: #10b981;">0</div></div>
+      <div class="stat-card"><div class="stat-label">Opt-Outs Suppressed</div><div class="stat-val">0</div></div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Contractor</th><th>Market Region</th><th>Status</th><th>Sequence Stage</th><th>Live Web Tool</th></tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>MPC Roofing & Construction</strong></td>
+          <td>Atlanta, GA, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/MPC_Roofing_Construction.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Mosaic Roofing Company LLC</strong></td>
+          <td>Atlanta, GA, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Mosaic_Roofing_Company_LLC.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Bumble Roofing of North Atlanta</strong></td>
+          <td>Atlanta, GA, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Bumble_Roofing_of_North_Atlanta.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Colony Roofers</strong></td>
+          <td>Atlanta, GA, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Colony_Roofers.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Fast Layne Plumbing and Drain</strong></td>
+          <td>Phoenix, AZ, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Fast_Layne_Plumbing_and_Drain.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Reliant Plumbing & Rooter</strong></td>
+          <td>Phoenix, AZ, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Reliant_Plumbing_Rooter.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Drainco Hydro</strong></td>
+          <td>Phoenix, AZ, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Drainco_Hydro.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Zoom Drain Phoenix</strong></td>
+          <td>Phoenix, AZ, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Zoom_Drain_Phoenix.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Plumber Priority One Of Phoenix</strong></td>
+          <td>Phoenix, AZ, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Plumber_Priority_One_Of_Phoenix.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Drain Pros, Emergency Plumbers</strong></td>
+          <td>Phoenix, AZ, US</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Drain_Pros_Emergency_Plumbers.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>M&M Gas Ltd</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/M_M_Gas_Ltd.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Saunders & Co Heating Solutions</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Saunders_Co_Heating_Solutions.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>INFINITY PLUMBING & MAINTENANCE SW LTD</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/INFINITY_PLUMBING_MAINTENANCE_SW_LTD.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>AMZ Plumbing Services</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/AMZ_Plumbing_Services.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Bolton Plumbing & Heating</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Bolton_Plumbing_Heating.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>First Response 360 Ltd</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/First_Response_360_Ltd.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Mr Dad's Electricians & Gas Engineers</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Mr_Dad_s_Electricians_Gas_Engineers.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Doctor Flow</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Doctor_Flow.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Metro Plumb (Lancashire)</strong></td>
+          <td>Bolton, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Metro_Plumb_Lancashire.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>JL & Oak</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/JL_Oak.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Flo Garden Design and Build</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Flo_Garden_Design_and_Build.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>The Gardeners</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/The_Gardeners.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Sage Landscapes</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Sage_Landscapes.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Bristol Garden Club</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Bristol_Garden_Club.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>G White Landscaping Bristol</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/G_White_Landscaping_Bristol.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Craft Landscaping Ltd</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Craft_Landscaping_Ltd.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Jack's Garden Services Ltd</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Jack_s_Garden_Services_Ltd.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>LB Landscaping</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/LB_Landscaping.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Bristol Landscapes LTD</strong></td>
+          <td>Bristol, UK</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Bristol_Landscapes_LTD.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>MSC Concrete Constructions</strong></td>
+          <td>Sunshine Coast, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/MSC_Concrete_Constructions.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Sunshine Coast Carpentry and Concreting</strong></td>
+          <td>Sunshine Coast, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Sunshine_Coast_Carpentry_and_Concreting.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Rawcon Concrete Contractors</strong></td>
+          <td>Sunshine Coast, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Rawcon_Concrete_Contractors.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Coastwide Concreting & Co</strong></td>
+          <td>Sunshine Coast, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Coastwide_Concreting_Co.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Sunny Coast Concreting</strong></td>
+          <td>Sunshine Coast, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Sunny_Coast_Concreting.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Roofline</strong></td>
+          <td>Sydney, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Roofline.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Auscity Roofing</strong></td>
+          <td>Sydney, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Auscity_Roofing.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Excel Roof Restoration</strong></td>
+          <td>Sydney, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Excel_Roof_Restoration.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Sydney Roof Repairs & Restorations</strong></td>
+          <td>Sydney, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Sydney_Roof_Repairs_Restorations.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Sydney Roof Painting</strong></td>
+          <td>Sydney, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Sydney_Roof_Painting.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+        <tr>
+          <td><strong>Empire Roofing Repairs and Restoration</strong></td>
+          <td>Sydney, AU</td>
+          <td><span class="badge pending">PENDING</span></td>
+          <td>Stage 0</td>
+          <td><a href="https://kyle34343-lgtm.github.io/portals/Empire_Roofing_Repairs_and_Restoration.html" target="_blank" class="preview-btn">View Live Tool ?</a></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

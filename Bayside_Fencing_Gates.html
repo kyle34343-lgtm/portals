@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bayside Fencing & Gates - Fast Quote Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e293b 0%, #090d16 60%, #030712 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 16px 12px 48px;
+    }
+    .phone-container {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 28px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .top-bar {
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 15, 29, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .location-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    .hero-media {
+      position: relative;
+      height: 180px;
+      width: 100%;
+      background-image: url('https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.98) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .review-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #facc15;
+    }
+    .content-box {
+      padding: 0 20px 18px;
+    }
+    .trade-name {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #f8fafc;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .hero-headline {
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .verified-scope {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .scope-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    .chat-card {
+      margin: 0 20px 22px;
+      background: rgba(8, 12, 22, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+    .chat-header {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .chat-header-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #cbd5e1;
+      text-transform: uppercase;
+    }
+    .chat-body {
+      padding: 16px;
+      min-height: 220px;
+      max-height: 310px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .msg-bot {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 16px;
+      border-radius: 14px 14px 14px 4px;
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 88%;
+      align-self: flex-start;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .msg-user {
+      background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+      color: #ffffff !important;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-radius: 14px 14px 4px 14px;
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 85%;
+      align-self: flex-end;
+      margin-left: auto;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
+    }
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .chip-btn {
+      background: rgba(234, 88, 12, 0.12);
+      border: 1px solid rgba(234, 88, 12, 0.4);
+      color: #fb923c;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chip-btn:hover {
+      background: #ea580c;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .chat-foot {
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      gap: 8px;
+    }
+    .chat-input {
+      flex: 1;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus {
+      border-color: #ea580c;
+    }
+    .chat-btn {
+      background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%) !important;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      font-size: 12px !important;
+      border: none !important;
+      border-radius: 10px !important;
+      padding: 12px 18px !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+    .chat-btn:hover {
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-container">
+    <div class="top-bar">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>LICENSED &amp; ACTIVE</span>
+      </div>
+      <span class="location-tag">Bayside & Brisbane Metro</span>
+    </div>
+
+    <div class="hero-media">
+      <div class="hero-overlay">
+        <div class="review-stars">
+          <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span>5.0 (48+ Reviews)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="trade-name">Bayside Fencing & Gates</div>
+      <div class="hero-headline">Architectural Hardwood & Custom Boundary Enclosures</div>
+      <div class="verified-scope">
+        <span class="scope-pill">Hardwood Batten</span><span class="scope-pill">Acoustic Walls</span><span class="scope-pill">Sliding Driveway Gates</span><span class="scope-pill">Timber Retaining</span>
+      </div>
+    </div>
+
+    <div class="chat-card">
+      <div class="chat-header">
+        <span class="chat-header-title">Instant Estimator Bot</span>
+        <span style="font-size:11px; font-weight:700; color:#34d399;">24/7 ONLINE</span>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="msg-bot">G'day! Looking for a fast fence or gate quote? What kind of project do you need completed?</div>
+        <div class="chips-row"><button type="button" class="chip-btn" onclick="selectChip('Colorbond / Timber')">Colorbond / Timber</button><button type="button" class="chip-btn" onclick="selectChip('Sliding Driveway Gate')">Sliding Driveway Gate</button><button type="button" class="chip-btn" onclick="selectChip('Commercial Perimeter')">Commercial Perimeter</button></div>
+      </div>
+      <div class="chat-foot">
+        <input id="quote-input" class="chat-input" type="text" placeholder="Select an option above or type..." onkeydown="if(event.key==='Enter') submitMsg();">
+        <button id="quote-btn" class="chat-btn" onclick="submitMsg()">GET PRICE</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let step = 1;
+    function selectChip(text) {
+      appendUserMsg(text);
+      nextStep();
+    }
+    function submitMsg() {
+      const inp = document.getElementById("quote-input");
+      const val = inp.value.trim();
+      if (!val) return;
+      appendUserMsg(val);
+      inp.value = "";
+      nextStep();
+    }
+    function appendUserMsg(text) {
+      const b = document.getElementById("chat-body");
+      const m = document.createElement("div");
+      m.className = "msg-user";
+      m.innerText = text;
+      b.appendChild(m);
+      b.scrollTop = b.scrollHeight;
+    }
+    function nextStep() {
+      const b = document.getElementById("chat-body");
+      const inp = document.getElementById("quote-input");
+      step++;
+      setTimeout(() => {
+        const bot = document.createElement("div");
+        bot.className = "msg-bot";
+        if (step === 2) {
+          bot.innerText = "Understood. Roughly what length (in metres) or height are we looking at?";
+          inp.placeholder = "e.g. 30 metres / 55 sqm...";
+        } else if (step >= 3) {
+          bot.style.borderColor = "#10b981";
+          bot.innerHTML = "<b style='color:#34d399;'>Request Received!</b><br>Our site estimator has logged your specs. What is the best mobile number to text your quote?";
+          inp.placeholder = "e.g. 0412 345 678...";
+          document.getElementById("quote-btn").innerText = "SUBMIT";
+        }
+        b.appendChild(bot);
+        b.scrollTop = b.scrollHeight;
+      }, 350);
+    }
+  </script>
+</body>
+</html>
