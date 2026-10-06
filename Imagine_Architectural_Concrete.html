@@ -1,481 +1,82 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concreting | Verified Trade Showroom</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #f59e0b;
-            --primary-glow: rgba(245, 158, 11, 0.25);
-            --bg-base: #090d16;
-            --surface-1: #0f172a;
-            --surface-2: #1e293b;
-            --surface-glass: rgba(15, 23, 42, 0.85);
-            --border: rgba(255, 255, 255, 0.08);
-            --border-highlight: rgba(245, 158, 11, 0.4);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --font-main: 'Plus Jakarta Sans', sans-serif;
-            --font-display: 'Space Grotesk', sans-serif;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-main); }
-        body { background: var(--bg-base); color: var(--text-main); line-height: 1.5; overflow-x: hidden; }
-
-        /* Top Trust Strip */
-        .trust-strip {
-            background: #020617;
-            border-bottom: 1px solid var(--border);
-            padding: 8px 24px;
-            font-size: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-        }
-        .trust-badges { display: flex; gap: 16px; align-items: center; }
-        .trust-badge-active { color: #10b981; display: flex; align-items: center; gap: 6px; }
-        .trust-badge-active::before { content: ""; width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
-
-        /* Header Navigation */
-        header {
-            padding: 18px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--surface-glass);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        .brand { display: flex; align-items: center; gap: 14px; }
-        .avatar {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--primary), #d97706);
-            color: #000;
-            font-weight: 800;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-        .brand-meta h1 { font-size: 1.15rem; font-weight: 700; color: #fff; }
-        .brand-meta p { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 700; letter-spacing: 0.08em; }
-
-        .header-actions { display: flex; gap: 14px; align-items: center; }
-        .btn-phone {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            padding: 10px 18px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #d97706);
-            color: #000;
-            font-weight: 800;
-            text-decoration: none;
-            font-size: 0.85rem;
-            padding: 10px 20px;
-            border-radius: 8px;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            box-shadow: 0 4px 14px var(--primary-glow);
-            transition: all 0.2s;
-        }
-
-        /* Container */
-        .container { max-width: 1240px; margin: 0 auto; padding: 48px 24px; }
-
-        /* Hero Split */
-        .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; margin-bottom: 72px; }
-        .trade-pill {
-            display: inline-block;
-            background: rgba(245, 158, 11, 0.12);
-            color: var(--primary);
-            border: 1px solid var(--primary-glow);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-        .hero h2 {
-            font-family: var(--font-display);
-            font-size: 2.75rem;
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 18px;
-            letter-spacing: -0.02em;
-        }
-        .hero p.lead { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
-        .hero-stats { display: flex; gap: 28px; padding-top: 18px; border-top: 1px solid var(--border); }
-        .stat-item h3 { font-size: 1.5rem; font-weight: 800; color: #fff; }
-        .stat-item span { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
-
-        /* Calculator Panel */
-        .calc-box {
-            background: var(--surface-1);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-            position: relative;
-        }
-        .calc-header { margin-bottom: 22px; }
-        .calc-header h3 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-        .calc-header p { font-size: 0.8rem; color: var(--text-muted); }
-
-        .calc-group { margin-bottom: 18px; }
-        .calc-group label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px; }
-        .pill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .pill-option {
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 10px 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-align: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .pill-option.active { background: var(--primary-glow); border-color: var(--primary); color: #fff; }
-
-        .estimate-banner {
-            background: #020617;
-            border: 1px dashed var(--border-highlight);
-            border-radius: 10px;
-            padding: 14px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-        }
-        .estimate-banner span { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
-        .estimate-banner strong { font-size: 1.2rem; font-family: var(--font-display); color: var(--primary); }
-
-        .calc-form input {
-            width: 100%;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            padding: 12px 14px;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 0.85rem;
-            margin-bottom: 12px;
-            outline: none;
-        }
-        .calc-form input:focus { border-color: var(--primary); }
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), #d97706);
-            border: none;
-            color: #000;
-            font-weight: 800;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            cursor: pointer;
-            box-shadow: 0 4px 14px var(--primary-glow);
-        }
-
-        /* Section Headlines */
-        .section-title { text-align: center; margin-bottom: 48px; }
-        .section-title h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
-        .section-title p { color: var(--text-muted); font-size: 0.95rem; }
-
-        /* Scope Tier Cards */
-        .tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px; }
-        .tier-card {
-            background: var(--surface-1);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 28px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .tier-card.featured { border-color: var(--primary); box-shadow: 0 0 25px var(--primary-glow); }
-        .tier-card.featured::before {
-            content: "POPULAR SPEC";
-            position: absolute;
-            top: -12px;
-            left: 24px;
-            background: var(--primary);
-            color: #000;
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-        }
-        .tier-card h4 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-        .tier-price { font-size: 1.6rem; font-weight: 800; color: var(--primary); font-family: var(--font-display); margin-bottom: 16px; }
-        .tier-features { list-style: none; margin-bottom: 24px; }
-        .tier-features li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .tier-features li::before { content: "✓"; color: var(--primary); font-weight: 800; }
-
-        /* Reviews Matrix */
-        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px; }
-        .review-card {
-            background: var(--surface-1);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-        }
-        .review-stars { color: #f59e0b; margin-bottom: 12px; font-size: 0.9rem; }
-        .review-card p { font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px; }
-        .reviewer-meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            background: #020617;
-            padding: 40px 24px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; }
-            .tiers-grid, .reviews-grid { grid-template-columns: 1fr; }
-            .hero h2 { font-size: 2rem; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagine Architectural Concrete | Interactive Scope Estimator</title>
+  <style>
+    body { background: #06090e; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; }
+    .card { max-width: 620px; margin: 20px auto; background: #0e1420; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 32px; box-shadow: 0 12px 35px rgba(0,0,0,0.55); }
+    .tag { color: #f59e0b; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    h1 { font-size: 26px; margin: 0 0 6px 0; }
+    .sub { color: #8b9bb4; font-size: 13px; margin-bottom: 14px; }
+    .rating-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: #f59e0b; font-weight: 700; margin-bottom: 20px; }
+    .slider-card { background: #141c2c; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; margin-bottom: 22px; }
+    .slider-title { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .range-input { width: 100%; -webkit-appearance: none; background: #26334d; height: 8px; border-radius: 4px; outline: none; }
+    .range-input::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #f59e0b; cursor: pointer; }
+    .price-display { margin-top: 14px; text-align: center; background: #090e17; border: 1px solid rgba(255,255,255,0.06); padding: 14px; border-radius: 8px; }
+    .price-val { font-size: 28px; font-weight: 900; color: #f59e0b; }
+    .input-box { width: 100%; box-sizing: border-box; background: #06090e; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 13px; color: #fff; margin-bottom: 12px; font-size: 14px; }
+    .btn { width: 100%; background: #f59e0b; color: #000; font-weight: 900; border: none; padding: 16px; border-radius: 6px; cursor: pointer; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .claim-box { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+    .claim-link { color: #8b9bb4; font-size: 12px; }
+    .claim-btn { display: inline-block; margin-top: 10px; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff; padding: 9px 18px; border-radius: 6px; font-size: 12px; text-decoration: none; font-weight: 700; }
+  </style>
 </head>
 <body>
+  <div class="card">
+    <img src="https://imagineaz.com/wp-content/uploads/2026/06/Imagine-Logo-Name.svg" style="max-height: 48px; margin-bottom: 12px; display: block;" alt="Logo">
+    <div class="tag">RESIDENTIAL FLATWORK & PATIOS</div>
+    <h1>Imagine Architectural Concrete</h1>
+    <div class="sub">Mesa, AZ, US • Interactive Scope Portal</div>
+    <div class="rating-badge">★ 4.9 Rating • 95 Google Reviews</div>
 
-    <!-- Trust Strip -->
-    <div class="trust-strip">
-        <div class="trust-badges">
-            <span class="trust-badge-active">QBCC LICENSED CONTRACTOR</span>
-            <span>MASTER BUILDERS / HIA AFFILIATED</span>
-            <span>$20M PUBLIC LIABILITY INSURED</span>
-        </div>
-        <div>REGION: MESA, AZ, AU</div>
+    <div class="slider-card">
+      <div class="slider-title">
+        <span>Patio / Driveway Size (sq ft)</span>
+        <span id="unit-val" style="color: #f59e0b;">600 sq ft</span>
+      </div>
+      <input type="range" class="range-input" id="scope-slider" min="250" max="1500" value="600" oninput="updatePricing()">
+      <div class="price-display">
+        <div style="font-size: 11px; text-transform: uppercase; color: #8b9bb4; letter-spacing: 0.8px; margin-bottom: 4px;">Dynamic Scope Estimate</div>
+        <div class="price-val" id="price-target">$0</div>
+      </div>
     </div>
 
-    <!-- Navigation Header -->
-    <header>
-        <div class="brand">
-            <div class="avatar">I</div>
-            <div class="brand-meta">
-                <h1>Imagine Architectural Concrete</h1>
-                <p>Mesa, AZ DIRECT CONTRACTOR PORTAL</p>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="952d346b-6311-403f-bdd7-1c585d2afe94">
+      <input type="hidden" name="subject" value="🚨 DIRECT LEAD DISPATCH: Imagine Architectural Concrete">
+      <input type="hidden" name="Contractor" value="Imagine Architectural Concrete">
+      <input type="hidden" id="form-scope-value" name="Selected_Scope" value="600 sq ft">
+      <input type="hidden" id="form-estimate-value" name="Estimated_Total" value="">
+      <input type="text" class="input-box" name="Client_Contact" placeholder="Your Direct Phone Number" required>
+      <input type="text" class="input-box" name="Job_Location" placeholder="Project City / Postcode / Zip" required>
+      <button type="submit" class="btn">REQUEST SCOPE ASSESSMENT →</button>
+    </form>
+    
+            <div class="claim-box">
+              <div class="claim-link">Are you the business owner of Imagine Architectural Concrete?</div>
+              <a href="https://buy.stripe.com/test_placeholder?client_ref=Imagine_Architectural_Concrete" target="_blank" class="claim-btn">⚡ Connect This Calculator To Your Own Domain ($297 Setup)</a>
             </div>
-        </div>
-        <div class="header-actions">
-            <a href="tel:(480) 557-5533" class="btn-phone">📞 (480) 557-5533</a>
-            <a href="#quote" class="btn-primary">Instant Scope Quote</a>
-        </div>
-    </header>
+            
+  </div>
 
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div>
-                <span class="trade-pill">COMMERCIAL & RESIDENTIAL CONCRETE</span>
-                <h2>Engineered Slabs, Crossovers & Designer Aggregate.</h2>
-                <p class="lead">Full-depth 32 MPa concrete pours, council certified crossovers, precision saw-cutting, and designer exposed aggregate finishes. Tailored for Mesa, AZ projects.</p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <h3>100%</h3>
-                        <span>Code Compliant</span>
-                    </div>
-                    <div class="stat-item">
-                        <h3>4.9 ★</h3>
-                        <span>Verified Reviews (95)</span>
-                    </div>
-                    <div class="stat-item">
-                        <h3>Direct</h3>
-                        <span>Priority Dispatch</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Calculator Form -->
-            <div class="calc-box" id="quote">
-                <div class="calc-header">
-                    <h3>Instant Concreting Scope Calculator</h3>
-                    <p>Select specifications for immediate dispatch estimation.</p>
-                </div>
-                <div class="calc-group">
-                    <label>Select Pour Profile</label>
-                    <div class="pill-grid">
-                        <div class="pill-option active" onclick="setOption(this, 1.0)">Designer Exposed Aggregate</div>
-                        <div class="pill-option" onclick="setOption(this, 1.35)">Council Certified Crossover</div>
-                        <div class="pill-option" onclick="setOption(this, 1.85)">Shed / Structural Slab (32MPa)</div>
-                    </div>
-                </div>
-                <div class="calc-group">
-                    <label>Surface Footprint (m?)</label>
-                    <div class="pill-grid">
-                        <div class="pill-option active" onclick="setSize(this, 1.0)">Standard</div>
-                        <div class="pill-option" onclick="setSize(this, 1.6)">Medium Run</div>
-                        <div class="pill-option" onclick="setSize(this, 2.5)">Full Property</div>
-                    </div>
-                </div>
-
-                <div class="estimate-banner">
-                    <span>Dynamic Scope Estimate:</span>
-                    <strong id="display-price">$4,200 ? $8,800 + GST</strong>
-                </div>
-
-                <form action="https://api.web3forms.com/submit" method="POST" class="calc-form">
-                    <input type="hidden" name="access_key" value="64dcff26-cda1-4475-816d-3174241e7dbe">
-                    <input type="hidden" name="subject" value="⚡ NEW COMMERCIAL INQUIRY: Imagine Architectural Concrete">
-                    <input type="hidden" name="contractor" value="Imagine Architectural Concrete">
-                    <input type="hidden" name="selected_scope" id="scope_input" value="Designer Exposed Aggregate">
-                    <input type="text" name="phone" placeholder="Your Direct Phone Number" required>
-                    <input type="text" name="suburb" placeholder="Installation Suburb / Postcode" value="Mesa, AZ" required>
-                    <button type="submit" class="btn-submit">Request Scope Assessment</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Service Tiers -->
-        <section>
-            <div class="section-title">
-                <h3>Certified Trade Scope Specifications</h3>
-                <p>Standardized, commercial-grade options designed for long-term durability and compliance.</p>
-            </div>
-            <div class="tiers-grid">
-                <div class="tier-card">
-                    <div>
-                        <h4>Plain / Broom Finish</h4>
-                        <div class="tier-price">$95 ? $120 / m?</div>
-                        <ul class="tier-features">
-                            <li>25 MPa Certified Mix</li>
-                            <li>SL72 Steel Reinforcement</li>
-                            <li>Standard Site Assessment</li>
-                            <li>Full Clean Up & Disposal</li>
-                        </ul>
-                    </div>
-                    <a href="#quote" class="btn-primary" style="text-align: center;">Select Spec</a>
-                </div>
-                <div class="tier-card featured">
-                    <div>
-                        <h4>Designer Exposed Aggregate</h4>
-                        <div class="tier-price">$140 ? $185 / m?</div>
-                        <ul class="tier-features">
-                            <li>32 MPa Mix + Acid Etch Clean</li>
-                            <li>Two-Coat High-Gloss Sealer</li>
-                            <li>Architectural Grade Materials</li>
-                            <li>Priority Scheduling Guarantee</li>
-                        </ul>
-                    </div>
-                    <a href="#quote" class="btn-primary" style="text-align: center;">Select Spec</a>
-                </div>
-                <div class="tier-card">
-                    <div>
-                        <h4>Engineered Industrial Slab</h4>
-                        <div class="tier-price">$195 ? $260 / m?</div>
-                        <ul class="tier-features">
-                            <li>Heavy SL92 Dual Layer Mesh</li>
-                            <li>Formwork & Council Inspection Sign-Off</li>
-                            <li>Engineered Structural Warranty</li>
-                            <li>Comprehensive Council Sign-Off</li>
-                        </ul>
-                    </div>
-                    <a href="#quote" class="btn-primary" style="text-align: center;">Select Spec</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Verified Reviews Section -->
-        <section>
-            <div class="section-title">
-                <h3>Verified Project Reviews</h3>
-                <p>Real feedback from local property owners and commercial asset managers in Mesa, AZ.</p>
-            </div>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p>"The quote assessment was clear and accurate right from the start. Job was finished two days ahead of schedule without surprise variations."</p>
-                    <div class="reviewer-meta">
-                        <span>Mark T. — Residential Client</span>
-                        <span>Verified Project</span>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p>"Exceptional communication and high-grade execution. Council compliance and structural specs were completely signed off without friction."</p>
-                    <div class="reviewer-meta">
-                        <span>Sarah L. — Property Manager</span>
-                        <span>Verified Project</span>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p>"Professional, clean site discipline, and transparent rates. The online scope calculator got us exact figures before work commenced."</p>
-                    <div class="reviewer-meta">
-                        <span>David B. — Commercial Owner</span>
-                        <span>Verified Project</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Imagine Architectural Concrete. Authorized Contractor Showroom & Direct Dispatch Hub.</p>
-        <p style="margin-top: 6px; font-size: 0.7rem; color: #64748b;">All trade services certified under local statutory authorities. Direct contractor quotes are indicative estimates based on submitted specs.</p>
-    </footer>
-
-    <script>
-        let specMultiplier = 1.0;
-        let sizeMultiplier = 1.0;
-        const baseMin = 4200;
-        const baseMax = 8800;
-        const curr = "$";
-
-        function setOption(el, mult) {
-            el.parentElement.querySelectorAll('.pill-option').forEach(p => p.classList.remove('active'));
-            el.classList.add('active');
-            specMultiplier = mult;
-            document.getElementById('scope_input').value = el.innerText;
-            updateTotal();
-        }
-
-        function setSize(el, mult) {
-            el.parentElement.querySelectorAll('.pill-option').forEach(p => p.classList.remove('active'));
-            el.classList.add('active');
-            sizeMultiplier = mult;
-            updateTotal();
-        }
-
-        function updateTotal() {
-            const min = Math.round(baseMin * specMultiplier * sizeMultiplier / 50) * 50;
-            const max = Math.round(baseMax * specMultiplier * sizeMultiplier / 50) * 50;
-            document.getElementById('display-price').innerText = curr + min.toLocaleString() + " – " + curr + max.toLocaleString() + " + GST";
-        }
-    </script>
+  <script>
+    const rate = 14;
+    const curr = "$";
+    const unit = "sq ft";
+    function updatePricing() {
+      const val = document.getElementById('scope-slider').value;
+      document.getElementById('unit-val').innerText = val + ' ' + unit;
+      const low = Math.round(val * rate * 0.9);
+      const high = Math.round(val * rate * 1.15);
+      const priceStr = curr + low.toLocaleString() + ' – ' + curr + high.toLocaleString();
+      document.getElementById('price-target').innerText = priceStr;
+      document.getElementById('form-scope-value').value = val + ' ' + unit;
+      document.getElementById('form-estimate-value').value = priceStr;
+    }
+    updatePricing();
+  </script>
 </body>
 </html>
